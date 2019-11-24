@@ -4,6 +4,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+TOTO LO QUE NECESITAS DEL CURSO ESTA ACA
+(https://github.com/AprendiendoFrontend/Aprendiendo-React/tree/master/udemy-curso-ejemplos)
+
+para instalar Prop-types -SE
+### `npm install prop-types -SE`
+
 ### `npm start`
 
 Runs the app in the development mode.<br />
