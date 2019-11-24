@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import ConditionalSection from './sections/conditional'
 
 // Forma 1
 function  Hello(props) {
@@ -19,9 +20,9 @@ class Hello3 extends Component {
 
 // Usamos los state ( Cambios de estado)
 class Contador extends Component {
-  constructor() {
-    super()
-    this.state = { contador: 1 }
+  constructor(props) {
+    super(props)
+    this.state = { contador: this.props.contadorInicial }
     // para actualizar el valor usamos setState
     setInterval(() => {
       this.setState({ contador: this.state.contador + 1 })
@@ -29,8 +30,22 @@ class Contador extends Component {
   }
   render() {
     // const contador = 0
-    return <span>{this.state.contador}</span>
+    // Nos comunicamos con el componente hijo
+    return <ContadorNumero numero={this.state.contador} />  }
+}
+
+
+// Este es un componente hijo del Componente padre que seria Contador
+class ContadorNumero extends Component {
+  render() {
+    console.log('ContadorNumero render()');
+  return <span>{this.props.numero}</span>
   }
+}
+
+// De esta forma especificamos un valor por defecto a la variable contadorInicial
+Contador.defaultProps = {
+  contadorInicial: 0
 }
 
 
@@ -75,7 +90,7 @@ function App() {
         <Hello title='Hola Mundo' />
         <Hello2 title='hola mundo con arrow fuction' />
         <Hello3 title='hola mundo con una clase' />
-        <Contador />
+        <Contador contadorInicial={100}/>
         <Text
           arrayOfNumbers={[2,3,10]}
           objectWithInfo={{ key: '1 valor', key2: '2 valor'}}
@@ -84,7 +99,10 @@ function App() {
           number={2}
           text='hola mundo con arrow fuction'
           title={<h1>Este es el Titulo</h1>}
-          />
+        />
+
+        {/* Renderizado Condicional ( Ejemplo practico) */}
+        <ConditionalSection />
         
       </header>
     </div>
