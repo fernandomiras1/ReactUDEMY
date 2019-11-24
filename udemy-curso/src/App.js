@@ -17,6 +17,34 @@ class Hello3 extends Component {
   }
 }
 
+class Text extends Component {
+  render() {
+    // destructuracion del objeto para achicar codigo. 
+    // Se usa en la primera linea del render.
+    const {
+      isActivated,
+      arrayOfNumbers,
+      multiply,
+      objectWithInfo,
+      title
+    } = this.props;
+
+    const textoSegunBool = isActivated ? 'On' : 'Off';
+    // hago un map al array y lo multiplico por dos 
+    const mappedNumbers = arrayOfNumbers.map(multiply);
+    return (
+      <div>
+        {title}
+        <p>{this.props.text}</p>
+        <p>{this.props.number}</p>
+        <p>{textoSegunBool}</p>
+        <p>{mappedNumbers.join(', ')}</p>
+        <p>{objectWithInfo.key}</p>
+      </div>
+    )
+  }
+}
+
 function App() {
   return (
     <div className="App">
@@ -26,17 +54,20 @@ function App() {
           Edit <code>src/App.js</code> and save to reload.
         </p>
        {/* Nuestro primer componente */}
-        <Hello title='hola mundo' />
+        <Hello title='Hola Mundo' />
         <Hello2 title='hola mundo con arrow fuction' />
-        <Hello3 title='hola mundo con arrow fuction' />
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Hello3 title='hola mundo con una clase' />
+        
+        <Text
+          arrayOfNumbers={[2,3,10]}
+          objectWithInfo={{ key: '1 valor', key2: '2 valor'}}
+          isActivated
+          multiply={(number) => number * 2}
+          number={2}
+          text='hola mundo con arrow fuction'
+          title={<h1>Este es el Titulo</h1>}
+          />
+        
       </header>
     </div>
   );
