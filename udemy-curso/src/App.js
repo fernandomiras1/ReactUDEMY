@@ -4,7 +4,8 @@ import './App.css';
 import ConditionalSection from './sections/conditional'
 import cars from './data/cars.json'
 import Forms from './sections/forms'
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
+import ComponentWillMount from './sections/life-cycle/componentWillMount'
 
 // Forma 1
 function  Hello(props) {
@@ -23,8 +24,11 @@ class Hello3 extends Component {
 
 // Usamos los state ( Cambios de estado)
 class Contador extends Component {
+  // Cliclo de vida constructor: es lo primero que se inicializar y lo hace por unica vez
   constructor(props) {
-    super(props)
+    // este método llama al constructor de Component padre en este caso Component
+    super(props) 
+    // inicializamos el state de nuestro componente
     this.state = { contador: this.props.contadorInicial }
     // para actualizar el valor usamos setState
     setInterval(() => {
@@ -129,6 +133,9 @@ class Eventos extends Component {
   constructor() {
     super()
     this.state = { mouseX: 0, mouseY: 0}
+
+     // bindeamos el contexto al método
+    // this.handleClick = this.handleClick.bind(this)
   }
 
   handleClick(e) {
@@ -137,6 +144,7 @@ class Eventos extends Component {
     alert('hola');
   }
   
+  // Se usa arrow function en los metodos donde necesitemos enlazar el contexto correcto
   handleMouseMove = (e) => {
     const { clientX, clientY } = e
     this.setState({ mouseX: clientX, mouseY: clientY })
@@ -231,6 +239,7 @@ class Children extends Component {
   }
 }
 
+
 function App() {
   return (
     <div className="App">
@@ -263,6 +272,8 @@ function App() {
         <Forms />
         {/* Trabajando con Children */}
         <Children />
+        {/* CICLOS DE VIDA DE LOS COMPONENTES  */}
+        <ComponentWillMount />
         
       </header>
     </div>
