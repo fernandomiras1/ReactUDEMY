@@ -17,6 +17,24 @@ class Hello3 extends Component {
   }
 }
 
+// Usamos los state ( Cambios de estado)
+class Contador extends Component {
+  constructor() {
+    super()
+    this.state = { contador: 1 }
+    // para actualizar el valor usamos setState
+    setInterval(() => {
+      this.setState({ contador: this.state.contador + 1 })
+    }, 1000);
+  }
+  render() {
+    // const contador = 0
+    return <span>{this.state.contador}</span>
+  }
+}
+
+
+
 class Text extends Component {
   render() {
     // destructuracion del objeto para achicar codigo. 
@@ -57,7 +75,7 @@ function App() {
         <Hello title='Hola Mundo' />
         <Hello2 title='hola mundo con arrow fuction' />
         <Hello3 title='hola mundo con una clase' />
-        
+        <Contador />
         <Text
           arrayOfNumbers={[2,3,10]}
           objectWithInfo={{ key: '1 valor', key2: '2 valor'}}
