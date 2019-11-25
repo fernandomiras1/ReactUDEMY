@@ -6,6 +6,8 @@ import cars from './data/cars.json'
 import Forms from './sections/forms'
 import PropTypes from 'prop-types'
 import ComponentWillMount from './sections/life-cycle/componentWillMount'
+import EjemploDeComponentDidMount from './sections/life-cycle/componentDidMount'
+import FetchExample from './sections/fetch-example'
 
 // Forma 1
 function  Hello(props) {
@@ -274,6 +276,9 @@ function App() {
         <Children />
         {/* CICLOS DE VIDA DE LOS COMPONENTES  */}
         <ComponentWillMount />
+        <EjemploDeComponentDidMount />
+        {/* APIs  */}
+        <FetchExample />
         
       </header>
     </div>
