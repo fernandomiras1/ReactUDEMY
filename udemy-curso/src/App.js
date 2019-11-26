@@ -8,6 +8,7 @@ import PropTypes from 'prop-types'
 import ComponentWillMount from './sections/life-cycle/componentWillMount'
 import EjemploDeComponentDidMount from './sections/life-cycle/componentDidMount'
 import FetchExample from './sections/fetch-example'
+import EjemploDeCicloDeActualizacion from './sections/life-cycle/ejemploCicloDeActualizacion'
 
 // Forma 1
 function  Hello(props) {
@@ -47,7 +48,7 @@ class Contador extends Component {
 // Este es un componente hijo del Componente padre que seria Contador
 class ContadorNumero extends Component {
   render() {
-    console.log('ContadorNumero render()');
+    // console.log('ContadorNumero render()');
   return <span>{this.props.numero}</span>
   }
 }
@@ -279,7 +280,8 @@ function App() {
         <EjemploDeComponentDidMount />
         {/* APIs  */}
         <FetchExample />
-        
+        {/* CICLO DE ACTUALIZACION */}
+        <EjemploDeCicloDeActualizacion />
       </header>
     </div>
   );
