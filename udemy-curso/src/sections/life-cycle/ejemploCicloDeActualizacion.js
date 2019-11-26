@@ -46,13 +46,16 @@ class AnimalImage extends Component {
     }, {
       filter: 'blur(5px)'
     }], {
-      duration: 500,
+      duration: 1000,
       easing: 'ease'
     })
   }
 
+  // Cuando se terina el render entra a este ciclo.
+  // se disparara justo despues del renderizado
   componentDidUpdate (prevProps, prevState) {
     console.log('4. componentDidUpdate')
+    // recuperamos la imagen de dom
     const img = document.querySelector('img')
     img.animate([
       {
@@ -62,7 +65,7 @@ class AnimalImage extends Component {
         filter: 'blur(5px)'
       }
     ], {
-      duration: 500,
+      duration: 1500,
       easing: 'ease'
     })
     console.log('from img element', { alt: img.alt })
