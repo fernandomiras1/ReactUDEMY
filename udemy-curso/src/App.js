@@ -9,6 +9,8 @@ import ComponentWillMount from './sections/life-cycle/componentWillMount'
 import EjemploDeComponentDidMount from './sections/life-cycle/componentDidMount'
 import FetchExample from './sections/fetch-example'
 import EjemploDeCicloDeActualizacion from './sections/life-cycle/ejemploCicloDeActualizacion'
+import EjemploDeComponentWillUnmount from './sections/life-cycle/componentWillUnmount'
+import EjemploDeComponentDidCatch from './sections/life-cycle/componentDidCatch'
 
 // Forma 1
 function  Hello(props) {
@@ -282,6 +284,8 @@ function App() {
         <FetchExample />
         {/* CICLO DE ACTUALIZACION */}
         <EjemploDeCicloDeActualizacion />
+        <EjemploDeComponentWillUnmount />
+        <EjemploDeComponentDidCatch />
       </header>
     </div>
   );
