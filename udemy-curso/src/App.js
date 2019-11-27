@@ -214,6 +214,41 @@ class Article extends Component {
   }
 }
 
+// BUENAS PRACTIVAS , LO PODES CREAR COMO UNA FUNCION A LOS COMPONENTES
+// lO QUE SI NO VAN A TENER CICLOS DE VIDA.
+function Article2 (props) {
+  return (
+    <section>
+      <h2>{props.title}</h2>
+      <p><em>Escrito por {props.author}</em></p>
+      <date>{props.date}</date>
+      <article>
+        {props.children}
+      </article>
+    </section>
+  )
+}
+// SE LE PUEDEN PONER PROTOTYPES SIN PROBLEMA
+Article2.propTypes = {
+  title: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  children: PropTypes.any
+}
+
+// DE LA MISMA FORMA SE PUEDEN CREAR COMPONENTES CON ARROW FUCTION
+const Button = ({ borderColor = 'red', label }) => (
+  <button style={{ borderColor, display: 'block' }}>
+    {label}
+  </button>
+)
+
+Button.propTypes = {
+  borderColor: PropTypes.string,
+  label: PropTypes.string.isRequired
+}
+
+
 class Children extends Component {
   render() {
     return (
