@@ -19,6 +19,7 @@ class BotonQueLanzaError extends Component {
 class EjemploDeComponentDidCatch extends Component {
   state = { hasError: false, errorMsg: '' }
 
+  // Captura errores de los componentes 
   componentDidCatch (error, errorInfo) {
       console.log('componentDidCatch')
       console.log({ error, errorInfo })
