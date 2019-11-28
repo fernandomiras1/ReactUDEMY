@@ -10,6 +10,14 @@ TOTO LO QUE NECESITAS DEL CURSO ESTA ACA
 para instalar Prop-types -SE
 ### `npm install prop-types -SE`
 
+Para istalar un entrono para poder trabajar con React, tenemos que instalar de manera Global
+Seria como un AngularCLI
+### `npm install -g create-react-app`
+
+De este Modo podemos crear el proyuecto 
+
+### `create-react-app search-movies`
+
 ### `npm start`
 
 Runs the app in the development mode.<br />
