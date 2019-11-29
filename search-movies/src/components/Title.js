@@ -1,7 +1,7 @@
 import React from 'react'
 
 export const Title = ({ children }) => (
-    <h1 class="title">{children}</h1>
+    <h1 className="title">{children}</h1>
 )
 // <Title title='search move' />
 

@@ -16,7 +16,10 @@ Instalamos el CSS que esta inspirado en FlexBox llamado Bulma
 
 ### `npm install bulma --save --save-exct`
 
-### `npm start`
+para instalar Prop-types -SE
+
+### `npm install prop-types -SE`
+
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
