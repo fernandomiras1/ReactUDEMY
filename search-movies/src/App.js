@@ -23,6 +23,14 @@ class App extends Component {
   }
 
   render() {
+    // Api nativa de JavaScrip
+    const url = new URL(document.location) // Direccion actual de la pag
+    const hasId = url.searchParams.has('id');
+
+    if (hasId ) {
+      return <Detail id={url.searchParams.get('id')}/>
+    }
+
     return (
       <div className="App">
         <Title>Search Movies</Title>
