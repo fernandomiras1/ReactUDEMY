@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+// import { useParams, useRouteMatch } from "react-router-dom";
 const API_KEY = '4287ad07'
 export class Detail extends Component {
     static propTypes = {
-        id: PropTypes.string
+        match: PropTypes.shape({
+            params: PropTypes.object,
+            isExact: PropTypes.bool,
+            path: PropTypes.string,
+            url: PropTypes.string
+        })
     }
 
     state = { movie: {} }
@@ -20,19 +26,29 @@ export class Detail extends Component {
 
     // Se renderizo al el menos una vez
     componentDidMount() {
-        const {id} = this.props
+        // let { id } = useParams();
+        // console.log('topicId', {id});
+        // console.log(this.props);
+        const {id} = this.props.match.params
         this._getMovieById({ id })
     }
+
+    _goBack() {
+        window.history.back()
+    }
+
     render() {
-        const { Title, Poster, Poster, Metascore, Plot } =
+        const { Title, Poster, Actors, Metascore, Plot } =
             this.state.movie
 
         return (
             <div>
+                <button onClick={this._goBack}>Volver</button>
                 <h1>{Title}</h1>
                 <img src={Poster}></img>
                 <h3>{Actors}</h3>
-                <p>pagina Detalle</p>
+                <span>{Metascore}</span>
+                <p>{Plot}</p>
             </div>
         )
     }    

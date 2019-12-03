@@ -20,6 +20,12 @@ para instalar Prop-types -SE
 
 ### `npm install prop-types -SE`
 
+para instalar Routas en React ( una de las mas famosas )
+link: (https://github.com/ReactTraining/react-router)
+Documentancion: (https://reacttraining.com/react-router/)
+
+### `npm install react-router-dom`
+
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
