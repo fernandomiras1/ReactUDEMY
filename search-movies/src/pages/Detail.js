@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { ButtonBackToHome } from '../components/ButtonBackToHome'
 
 // import { useParams, useRouteMatch } from "react-router-dom";
 const API_KEY = '4287ad07'
@@ -28,7 +29,7 @@ export class Detail extends Component {
     componentDidMount() {
         // let { id } = useParams();
         // console.log('topicId', {id});
-        // console.log(this.props);
+        console.log(this.props);
         const {id} = this.props.match.params
         this._getMovieById({ id })
     }
@@ -43,9 +44,9 @@ export class Detail extends Component {
 
         return (
             <div>
-                <button onClick={this._goBack}>Volver</button>
+                <ButtonBackToHome />
                 <h1>{Title}</h1>
-                <img src={Poster}></img>
+                <img src={Poster} alt={Title}></img>
                 <h3>{Actors}</h3>
                 <span>{Metascore}</span>
                 <p>{Plot}</p>

@@ -15,6 +15,7 @@ export class Movie extends Component {
         const { id, poster, title, year } = this.props
 
         return (
+            // el to padth del destino 
             <Link to={`/detail/${id}`} className="card">
                 <div className="card-image">
                     <figure className="image">
