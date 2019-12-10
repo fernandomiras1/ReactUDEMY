@@ -8,6 +8,7 @@ import { HeroSection } from './layout/HeroSection';
 export const Layout = ({ children }) => {
   return (
     <div>
+      {/* Se usa para SEO, podes pasar todos tus scripy o meta para renderizar en el head de tu app */}
       <Helmet
         title="Cryptofy"
         script={[

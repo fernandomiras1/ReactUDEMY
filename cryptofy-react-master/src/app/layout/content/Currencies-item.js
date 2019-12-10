@@ -16,7 +16,9 @@ export const CurrenciesItem = ({ currency, type }) => {
   return (
     <article className="col-md-6 col-lg-3">
       <div className="currencies__item">
+        {/* se usa para obtener el color mas propmiente de una imagen */}
         <Palette
+        // le pasamos la imagen que queremos que nos saque el color dominante
           image={
             process.env.PUBLIC_URL + `/img/${currency.symbol.toLowerCase()}.png`
           }
