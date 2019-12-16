@@ -2,11 +2,12 @@
 
 ## Available Scripts
 
-News API / APP de noticias
+Eventbrite API v3
 
+url: https://www.eventbrite.com/platform/api
 user: fernando.miras.pc@gmail.com
 pass: fernando123456
 
 Your API key is : 89937fd3672b4349aa1486f1c80d1189
 
-### `https://newsapi.org/`
+### `https://www.eventbrite.com/platform/api`
