@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-
+import PropTypes from 'prop-types';
 export class Formulario extends Component {
+
+    static propTypes = {
+        consultarNoticias: PropTypes.func.isRequired
+    }
+
     state = { 
-        categoria: 'general'
+        categoria: 'general' 
      }
 
     cambiarCategoria = e => {

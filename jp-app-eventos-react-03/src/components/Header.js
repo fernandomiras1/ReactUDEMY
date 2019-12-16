@@ -2,11 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types';
 
 export const Header = ({titulo}) => (
-    <nav className="nav-wrapper light-blue darken-3">
-        <a className="brand-logo center">
+    <header className="uk-margin" uk-margin='true'>
+        <h1 className="uk-text-center">
             {titulo}
-        </a>
-    </nav>
+        </h1>
+    </header>
 )
 
 Header.propTypes = {
