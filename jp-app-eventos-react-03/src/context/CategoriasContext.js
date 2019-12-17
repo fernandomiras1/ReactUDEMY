@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 // Crear el context
-const categoriasContext = React.createContext();
+const CategoriasContext = React.createContext();
 // Creamos el Consumer
-export const categoriasConsumer = categoriasContext.Consumer;
+export const CategoriasConsumer = CategoriasContext.Consumer;
 
 class CategoriasProvider extends Component {
     // https://www.eventbrite.com/account-settings/apps
@@ -15,10 +15,11 @@ class CategoriasProvider extends Component {
     }
 
     obtenerCategorias = () => {
-        let url = `https://www.eventbrite.com/v3/categories/?token=${this.tokenEventbrite}&locale=es_ES`;
+        let url = `https://www.eventbriteapi.com/v3/categories/?token=${this.tokenEventbrite}&locale=es_ES`;
 
         axios.get(url).then(categorias => {
             console.log(categorias);
+            this.setState({ categorias: categorias.data.categories });
         })
     }
 
@@ -27,13 +28,13 @@ class CategoriasProvider extends Component {
     }
     render() { 
         return (
-            <categoriasContext.Provider
-            value={{
-                categorias: this.state.categorias
-            }}
-            >
-            {this.props.children}
-            </categoriasContext.Provider>
+            <CategoriasContext.Provider
+                value={{
+                    categorias: this.state.categorias
+                }}
+                >
+                {this.props.children}
+            </CategoriasContext.Provider>
         );
     }
 }

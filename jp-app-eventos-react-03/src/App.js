@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import CategoriasProvider from './context/CategoriasContext';
+import {EventosProvider} from './context/EventosContext';
 
 // COMPONENTES
 import {Header} from './components/Header';
@@ -14,13 +15,14 @@ class App extends Component {
 
   render() { 
     return (
-      <CategoriasProvider>
-        <Header titulo='Eventos en React con Event' />
-
-        <div className="uk-container">
-          <Formulario />
-        </div>
-      </CategoriasProvider>
+      <EventosProvider>
+        <CategoriasProvider>
+          <Header titulo='Eventos en React con Event' />
+          <div className="uk-container">
+            <Formulario />
+          </div>
+        </CategoriasProvider>
+      </EventosProvider>
      );
   }
 }
