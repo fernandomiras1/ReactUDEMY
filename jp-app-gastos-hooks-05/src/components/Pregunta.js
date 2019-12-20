@@ -3,7 +3,7 @@ import { Error } from './Error';
 
 export function Pregunta(props) {
 
-    const { guardarPresupuesto, guardarPreguntaPresu } = props;
+    const { guardarPresupuesto, guardarPreguntaPresu, guardarRestante } = props;
 
     // definir el state
     const [cantidad, guardarCantidad] = useState(0);
@@ -22,6 +22,7 @@ export function Pregunta(props) {
         guardarError(false);
         // Le pasamos el presupuesto al App.js
         guardarPresupuesto(cantidad);
+        guardarRestante(cantidad);
         guardarPreguntaPresu(false);
     }
 
