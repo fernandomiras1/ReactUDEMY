@@ -4,6 +4,7 @@ import Criptomoneda from './Criptomoneda';
 import Error from './Error';
 
 function Formulario({guardarMoneda, guardarCriptomoneda}) {
+    // gurdamos en el state los datos de la API.
     const [ criptomonedas, guardarCriptomonedas ] = useState([]);
     const [ monedaCotizar, guardarMonedaCotizar ] = useState('');
     const [ criptoCotizar, guardarCriptoCotizar ] = useState('');
