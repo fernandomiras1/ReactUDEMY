@@ -6,3 +6,4 @@ URL (https://gist.github.com/juanpablogdl/5fb3278ba3b68d23267393abd7d1d605)
 Dependencias
 
 ### `npm i react-router-dom`
+### `npm i -D uuid`
