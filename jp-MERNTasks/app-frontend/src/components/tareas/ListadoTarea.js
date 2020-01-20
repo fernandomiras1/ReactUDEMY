@@ -1,22 +1,38 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import Tarea from './Tarea';
+import proyectoContext from '../../context/proyectos/proyectoContext';
+import tareaContext from '../../context/tareas/tareaContext';
 
 const ListadoTareas = () => {
 
-    const tareas = [
-        {id: 1, nombre: 'Elegir Plataforma', estado: true},
-        {id: 2, nombre: 'Elegir Colores', estado: false},
-        {id: 3, nombre: 'Elegir Plataformas de pago', estado: false},
-        {id: 4, nombre: 'Elegir Hosting', estado: true},
-    ];
+    // Extraer proyectos de state inicial
+    const proyectosContext = useContext(proyectoContext);
+    const { proyecto, emilinarProyecto } = proyectosContext;
+
+    // Obtener las tareas del proyecto
+    const tareasContext = useContext(tareaContext);
+    const { tareasProyecto } = tareasContext;
+  
+
+    // Si no hay proyecto seleccionado
+    if (!proyecto) return <h2>Selecciona un proyecto</h2>;
+
+
+    // Array destructuring para extraer el proyecto actual
+    const [proyectoActual] = proyecto;
+
+    // Eliminar un Proyecto
+    const onClickEliminar = () => {
+        emilinarProyecto(proyectoActual.id);
+    }
 
     return (
         <Fragment>
-            <h2>Proyecto: Tienda Virtual</h2>
+            <h2>Proyecto: {proyectoActual.nombre}</h2>
             <ul className="listado-tareas">
-                {tareas.length === 0
+                {tareasProyecto.length === 0
                     ? (<li className="tarea"><p>No hay tareas</p></li>)
-                    : tareas.map(tarea => (
+                    : tareasProyecto.map(tarea => (
                         <Tarea key={tarea.id}
                             tarea={tarea}
                         />
@@ -24,8 +40,11 @@ const ListadoTareas = () => {
                 }
             </ul>
 
-            <button type="button" className="btn btn-eliminar">
-                Eliminar Proyecto &times;
+            <button 
+                type="button"
+                className="btn btn-eliminar"
+                onClick={onClickEliminar}
+            >Eliminar Proyecto &times;
             </button>
         </Fragment>
     );
