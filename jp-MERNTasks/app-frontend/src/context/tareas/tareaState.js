@@ -3,7 +3,9 @@ import TareaContext from './tareaContext';
 import TareaReducer from './tareaReducer';
 import {
     TAREAS_PROYECTO,
-    AGREGAR_TAREA
+    AGREGAR_TAREA,
+    VALIDAR_TAREA,
+    ELIMINAR_TAREA
 } from '../../types/index';
 
 const TareaState = props => {
@@ -18,7 +20,8 @@ const TareaState = props => {
             {id: 7, proyectoId: 4, nombre: 'Elegir Hosting', estado: true},
             {id: 8, proyectoId: 4, nombre: 'Elegir Hosting', estado: true},
         ],
-        tareasProyecto: null
+        tareasProyecto: null,
+        errorTarea: false
     }
 
     // Crear dispatch y state
@@ -39,13 +42,32 @@ const TareaState = props => {
             payload: tarea
         })
     }
+
+    // Valida y muestra un error en caso de que sea necesario
+    const validarTarea = () => {
+        dispatch({
+            type: VALIDAR_TAREA
+        })
+    }
+    
+    // Eliminar tarea por id 
+    const eliminarTarea = id => {
+        dispatch({
+            type: ELIMINAR_TAREA,
+            payload: id
+        })
+    }
+
     return (
         <TareaContext.Provider
             value={{
                 tareas: state.tareas,
                 tareasProyecto: state.tareasProyecto,
+                errorTarea: state.errorTarea,
                 obtenerTareas,
-                agregarTarea
+                agregarTarea,
+                validarTarea,
+                eliminarTarea
             }}
         >
             {props.children}

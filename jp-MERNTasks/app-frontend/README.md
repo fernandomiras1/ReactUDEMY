@@ -7,3 +7,6 @@ Dependencias
 
 ### `npm i react-router-dom`
 ### `npm i -D uuid`
+
+Agregar Animaciones librery
+### `npm i react-transition-group`
