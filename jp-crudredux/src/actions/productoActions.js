@@ -18,15 +18,18 @@ export function crearNuevoProduAction(producto) {
 }
 
 const agregarProducto = () => ({
-    type: AGREGAR_PRODUCTO
+    type: AGREGAR_PRODUCTO,
+    payload: true
 });
 
 // Si el produto se guarda en la base de datos
 const agregarProductoExito = producto => ({
-    type: AGREGAR_PRODUCTO_EXITO
+    type: AGREGAR_PRODUCTO_EXITO,
+    payload: producto
 });
 
 // Si hubo un error
-const agregarProductoError = error => ({
-    type: AGREGAR_PRODUCTO_ERROR
+const agregarProductoError = estado => ({
+    type: AGREGAR_PRODUCTO_ERROR,
+    payload: estado
 });
