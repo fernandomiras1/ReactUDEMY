@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { crearNuevoProduAction } from '../actions/productoActions';
-import { useDispatch } from 'react-redux';
-
-const NuevoProducto = () => {
+import { useDispatch, useSelector } from 'react-redux';
+// el history es como el Router de Angualr
+const NuevoProducto = ({history}) => {
 
     // sate del componente
     const [nombre, guardarNombre] = useState('');
@@ -10,6 +10,12 @@ const NuevoProducto = () => {
 
     // utilizar use dispatch y te crea una funcion
     const dispatch = useDispatch();
+
+    // Acceder al state del store
+    const cargando = useSelector(state => state.productos.loading);
+    const error = useSelector(state => state.productos.error);
+
+
     // manda a llamar el action de productoAction
     const agregarProducto = producto => dispatch(crearNuevoProduAction(producto));
 
@@ -26,6 +32,9 @@ const NuevoProducto = () => {
             nombre,
             precio
         });
+
+        // redireccionar al home
+        history.push('/');
     }
     
     return (
@@ -68,6 +77,10 @@ const NuevoProducto = () => {
                                     Agregar
                             </button>
                         </form>
+
+                        { cargando ? <p>Cargando</p> : null }
+                        
+                        { error ? <p className="alert alert-danger p2 mt-4 text-center">Hubo un error</p> : null }
                     </div>
                 </div>
             </div>
