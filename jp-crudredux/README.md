@@ -5,6 +5,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Correr el Fornt
 ### `npm start`
 
+instalar json Server.
+### `sudo npm i -g json-server`
+
 Correr la API 
 ### `json-server db.json --port 4000`
 
