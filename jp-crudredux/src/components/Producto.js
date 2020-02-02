@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 // Redux
 import { borrarProductoAction, obtenerProductoEditar } from '../actions/productoActions';
 import { useDispatch } from 'react-redux';

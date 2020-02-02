@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { crearNuevoProduAction } from '../actions/productoActions';
 import { useDispatch, useSelector } from 'react-redux';
+import { mostrarAlerta, ocultarAlertaAction } from '../actions/alertaActions';
 // el history es como el Router de Angualr
 const NuevoProducto = ({history}) => {
 
@@ -14,6 +15,7 @@ const NuevoProducto = ({history}) => {
     // Acceder al state del store
     const cargando = useSelector(state => state.productos.loading);
     const error = useSelector(state => state.productos.error);
+    const alerta = useSelector(state => state.alerta.alerta);
 
 
     // manda a llamar el action de productoAction
@@ -24,9 +26,18 @@ const NuevoProducto = ({history}) => {
         
         // Validar Formulario
         if (nombre.trim() === '' || precio <= 0) {
+            
+            const alerta = {
+                msg: 'Ambos campos son obligatorios',
+                clases: 'alert alert-danger text-center text-uppercase p3'
+            }
+            dispatch(mostrarAlerta(alerta));
+
             return;
         }
-
+        // si no hay errores
+        dispatch(ocultarAlertaAction());
+        
         // Crear el nuevo Producto
         agregarProducto({
             nombre,
@@ -45,6 +56,8 @@ const NuevoProducto = ({history}) => {
                         <h2 className="text-center mb-4 font-weight-blod">
                             Agregar Nuevo Producto
                         </h2>
+
+                        {alerta ? <p className={alerta.clases}>{alerta.msg}</p>: null}
 
                         <form onSubmit={onSubmitNuevoProducto}>
                             <div className="form-group">

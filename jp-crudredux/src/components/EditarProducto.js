@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { editarPrdocutoAction } from '../actions/productoActions';
+import { useHistory } from 'react-router-dom';
 
 const EditarProducto = () => {
 
@@ -8,22 +9,34 @@ const EditarProducto = () => {
     const [producto, guardarProducto] = useState({
         nombre: '',
         precio: ''
-    });
-
+    })
+    const history = useHistory();
+    const dispatch = useDispatch();
     // Producto a editar
     const productoEditar = useSelector(state => state.productos.productoEditar);
-    const { nombre, precio, id} = producto;
 
     // llenar el state automaticamente
     useEffect(() => {
         guardarProducto(productoEditar);
+    }, [productoEditar]);
 
-    }, [productoEditar])
+    // Leer los datos del formulario
+    const onChangeFormulario = e => {
+        guardarProducto({
+            ...producto,
+            [e.target.name]: e.target.value 
+        });
+    }
+
+    const { nombre, precio } = producto;
 
     const onSubmitEditar = e => {
-        e.prevetDefault();
-        editarPrdocutoAction();
+        e.preventDefault();
+        dispatch(editarPrdocutoAction(producto));
+        // redireccionamos hacia la home
+        history.push('/');
     }
+
     return ( 
         <div className="row justify-content-center">
             <div className="col-md-8">
@@ -42,6 +55,7 @@ const EditarProducto = () => {
                                     placeholder="Nombre Producto"
                                     name="nombre"
                                     value={nombre}
+                                    onChange={onChangeFormulario}
                                 />
                             </div>
                         
@@ -53,6 +67,7 @@ const EditarProducto = () => {
                                     placeholder="Precio Producto"
                                     name="precio"
                                     value={precio}
+                                    onChange={onChangeFormulario}
                                 />
                             </div>
 
