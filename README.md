@@ -25,3 +25,7 @@ You will also see any lint errors in the console.
 - Contenxt API
 Animaciones librery
 -npm i react-transition-group
+
+### `jp-ProductHunt-ssr`
+- next.js (ssr)
+- firebase
