@@ -1,0 +1,17 @@
+.number-rotation-container {
+  align-items: center;
+  background: #f1f1f1;
+  display: flex;
+  height: var(--display-height);
+  padding: 0 3px;
+  border-radius: 10px 10px 0 0;
+}
+
+.number-rotation-value {
+  color: var(--display-text-color);
+  font-size: 16px;
+  font-family: var(--main-font);
+  font-weight: var(--display-text-weight);
+  margin-left: auto;
+  overflow: hidden;
+}
