@@ -4,7 +4,7 @@ import './NumbeRotation.css';
 
 const NumbeRotation = ({ value }) => (
   <div className="number-rotation-container">
-    <strong>Number Rotation:</strong>
+    <strong>Numbers Rotation:</strong>
     <p className="number-rotation-value">{value.toString()}</p>
   </div>
 );

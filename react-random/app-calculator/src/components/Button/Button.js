@@ -4,7 +4,7 @@ import './Button.css';
 
 const Button = ({ handleBtnPress, btnAction, btnType, btnValue }) => {
   const btnClass = `btn-container ${btnType}`;
-  console.log('Button', { handleBtnPress, btnAction, btnType, btnValue });
+
   return (
     <div className={btnClass} 
       onClick={() => btnAction(btnValue)} 
