@@ -9,7 +9,7 @@ import './Calculator.css';
 class Calculator extends Component {
   state = {
     displayValue: '0',
-    numbers: ['7', '8', '9', '4', '5', '6', '1', '2', '3', '.', '0', '<='],
+    numbers: ['7', '8', '9', '4', '5', '6', '1', '2', '3', '0', '.', '<='],
     operators: ['/', '*', '-', '+'],
     selectedOperator: '',
     storedValue: '',
@@ -17,11 +17,11 @@ class Calculator extends Component {
   };
 
   componentDidMount = () => {
-    document.addEventListener('keydown', this.handleKeyPress);
+    document.addEventListener('keydown', this.handleBtnPress);
   };
 
   componentWillUnmount = () => {
-    document.removeEventListener('keydown', this.handleKeyPress);
+    document.removeEventListener('keydown', this.handleBtnPress);
   };
 
   callOperator = () => {
@@ -56,7 +56,7 @@ class Calculator extends Component {
     this.setState({ displayValue, selectedOperator, storedValue: updateStoredValue });
   };
 
-  handleKeyPress = (event) => {
+  handleBtnPress = (event) => {
     const { numbers, operators } = this.state;
 
     if (event.key === 'Backspace') this.updateDisplay('<=');
@@ -87,6 +87,11 @@ class Calculator extends Component {
     this.setState({ displayValue, selectedOperator, storedValue });
   };
 
+  numbersRotation = (numbers) => {
+    numbers.push(numbers.shift())
+    return numbers
+  }
+
   updateDisplay = (value) => {
     let { displayValue, numberRotation } = this.state;
 
@@ -94,8 +99,7 @@ class Calculator extends Component {
 
     if (value === '<=') {
       displayValue = displayValue.substr(0, displayValue.length - 1);
-      numberRotation = this.moveArray(numberRotation);
-      // const value = numberRotation.push(numberRotation.shift()) 
+      numberRotation = this.numbersRotation(numberRotation);
       console.log(value);
       this.setState({ numberRotation });
 
@@ -108,11 +112,6 @@ class Calculator extends Component {
     this.setState({ displayValue });
   };
 
-  moveArray = (obj) => {
-    obj.push(obj.shift())
-    return obj
-  }
-
   render() {
     const { displayValue, numbers, operators, numberRotation } = this.state;
 
@@ -121,7 +120,7 @@ class Calculator extends Component {
         <NumbeRotation value={numberRotation} />
         <Display displayValue={displayValue} />
         <Keypad
-          handleKeyPress={this.handleKeyPress}
+          handleBtnPress={this.handleBtnPress}
           operators={operators}
           callOperator={this.callOperator}
           numbers={numbers}

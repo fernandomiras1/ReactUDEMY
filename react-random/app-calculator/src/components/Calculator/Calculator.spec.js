@@ -200,7 +200,7 @@ describe('mounted Calculator', () => {
     const spy = jest.spyOn(wrapper.instance(), 'callOperator');
     wrapper.instance().forceUpdate();
     expect(spy).toHaveBeenCalledTimes(0);
-    wrapper.find('.submit-key').simulate('click');
+    wrapper.find('.submit-btn').simulate('click');
     expect(spy).toHaveBeenCalledTimes(1);
   });
 });

@@ -2,27 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Keypad.css';
 
-import Key from '../Key/Key';
+import Button from '../Button/Button';
 import './Keypad.css';
 
-const Keypad = ({ operators, callOperator, handleKeyPress, numbers, setOperator, updateDisplay }) => {
+const Keypad = ({ operators, callOperator, handleBtnPress, numbers, setOperator, updateDisplay }) => {
   const numberKeys = numbers.map((number, iterator) => (
-    <Key
-      handleKeyPress={handleKeyPress}
+    <Button
+      handleBtnPress={handleBtnPress}
       key={`${number}${iterator}`}
-      keyType="number-key"
-      keyValue={number}
-      keyAction={updateDisplay}
+      btnType="number-btn"
+      btnValue={number}
+      btnAction={updateDisplay}
     />
   ));
 
   const operatorKeys = operators.map((operator, iterator) => (
-    <Key
-      handleKeyPress={handleKeyPress}
+    <Button
+      handleBtnPress={handleBtnPress}
       key={`${operator}${iterator}`}
-      keyType="operator-key"
-      keyValue={operator}
-      keyAction={setOperator}
+      btnType="operator-btn"
+      btnValue={operator}
+      btnAction={setOperator}
     />
   ));
 
@@ -31,7 +31,12 @@ const Keypad = ({ operators, callOperator, handleKeyPress, numbers, setOperator,
       <div className="numbers-container">{numberKeys}</div>
       <div className="operators-container">{operatorKeys}</div>
       <div className="submit-container">
-        <Key handleKeyPress={handleKeyPress} keyType="submit-key" keyValue="=" keyAction={callOperator} />
+        <Button 
+          handleBtnPress={handleBtnPress} 
+          btnType="submit-btn" 
+          btnValue="=" 
+          btnAction={callOperator}
+        />
       </div>
     </div>
   );
@@ -39,7 +44,7 @@ const Keypad = ({ operators, callOperator, handleKeyPress, numbers, setOperator,
 
 Keypad.propTypes = {
   callOperator: PropTypes.func.isRequired,
-  handleKeyPress: PropTypes.func.isRequired,
+  handleBtnPress: PropTypes.func.isRequired,
   numbers: PropTypes.array.isRequired,
   operators: PropTypes.array.isRequired,
   setOperator: PropTypes.func.isRequired,

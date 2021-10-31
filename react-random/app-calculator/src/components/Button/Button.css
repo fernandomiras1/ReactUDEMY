@@ -1,0 +1,49 @@
+.btn-container {
+  align-items: center;
+  display: flex;
+  height: 25%;
+  justify-content: center;
+  transition: background-color 0.3s linear;
+}
+
+.btn-container:hover {
+  cursor: pointer;
+}
+
+.operator-btn {
+  background-color: var(--action-btn-color);
+  border-radius: 50px;
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.operator-btn:hover {
+  background-color: var(--action-btn-color-hover);
+}
+
+.number-btn {
+  background-color: var(--number-btn-color);
+  margin-bottom: 5px;
+  width: calc(100% / 3);
+}
+
+.number-btn:hover {
+  background-color: var(--number-btn-color-hover);
+}
+
+.submit-btn {
+  background-color: var(--submit-btn-color);
+  border-radius: 50px;
+  height: 100%;
+  width: 100%;
+}
+
+.submit-btn:hover {
+  background-color: var(--submit-btn-color-hover);
+}
+
+.btn-value {
+  color: var(--btn-text-color);
+  font-family: var(--main-font);
+  font-size: var(--btn-text-size);
+}
