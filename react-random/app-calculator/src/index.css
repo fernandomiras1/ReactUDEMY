@@ -4,11 +4,10 @@ global variables
 
 :root {
   --action-btn-color: #213747;
-  --action-btn-color-hover: #2a2a2a;
+  --action-btn-color-hover: #142c3e;
   --calculator-background-color: #29485f;
-  --display-background-color: #b8b8b8;
+  --display-background-color: #878787;
   --number-btn-color: #29485f;
-  --number-btn-color-hover: #2a2a2a;
   --submit-btn-color: #ce3406;
   --submit-btn-color-hover: #f73a00;
 
@@ -31,7 +30,7 @@ global variables
   --calculator-width: 20%;
 
   /* display dimensions */
-  --display-height: 50px;
+  --display-height: 40px;
   --display-width: 92%;
 
   /* keypad dimensions */
