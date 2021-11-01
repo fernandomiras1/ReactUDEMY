@@ -25,10 +25,9 @@ class Calculator extends Component {
   };
 
   callOperator = () => {
-    console.log('callOperator');
     let { displayValue, selectedOperator, storedValue } = this.state;
     const updateStoredValue = displayValue;
-
+    
     displayValue = parseFloat(displayValue);
     storedValue = parseFloat(storedValue);
 
@@ -74,9 +73,6 @@ class Calculator extends Component {
   setOperator = (value) => {
     let { displayValue, selectedOperator, storedValue } = this.state;
 
-    console.log('displayValue', displayValue);
-    console.log('selectedOperator', selectedOperator);
-    console.log('storedValue', storedValue);
     if (selectedOperator === '') {
       storedValue = displayValue;
       displayValue = '';
@@ -99,16 +95,12 @@ class Calculator extends Component {
 
     if (value === '<=') {
       displayValue = displayValue.substr(0, displayValue.length - 1);
-      numberRotation = this.numbersRotation(numberRotation);
-      console.log(value);
-      this.setState({ numberRotation });
-
-
+      this.numbersRotation(numberRotation);
       if (displayValue === '') displayValue = '0';
     } else {
       displayValue === '0' ? (displayValue = value) : (displayValue += value);
     }
-    console.log('displayValue', displayValue);
+
     this.setState({ displayValue });
   };
 
