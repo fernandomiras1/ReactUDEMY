@@ -3,10 +3,8 @@ import PropTypes from 'prop-types';
 import './Button.css';
 
 const Button = ({ handleBtnPress, btnAction, btnType, btnValue }) => {
-  const btnClass = `btn-container ${btnType}`;
-
   return (
-    <div className={btnClass} 
+    <div className={`btn-container ${btnType}`} 
       onClick={() => btnAction(btnValue)} 
       onKeyPress={event => handleBtnPress(event)}>
         <p className="btn-value">{btnValue}</p>

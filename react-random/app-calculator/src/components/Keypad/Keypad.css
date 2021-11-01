@@ -3,7 +3,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   height: var(--keypad-height);
-  padding: 2%;
+  padding: 5px;
   width: var(--keypad-width);
 }
 
@@ -18,7 +18,6 @@
 .operators-container {
   display: flex;
   flex-direction: column;
-  height: 80%;
   width: 25%;
 }
 

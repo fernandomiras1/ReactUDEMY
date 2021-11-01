@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Keypad.css';
-
 import Button from '../Button/Button';
 import './Keypad.css';
 
 const Keypad = ({ operators, callOperator, handleBtnPress, numbers, setOperator, updateDisplay }) => {
-  const numberKeys = numbers.map((number, iterator) => (
+  const numberButtons = numbers.map((number, iterator) => (
     <Button
       handleBtnPress={handleBtnPress}
       key={`${number}${iterator}`}
@@ -16,7 +14,7 @@ const Keypad = ({ operators, callOperator, handleBtnPress, numbers, setOperator,
     />
   ));
 
-  const operatorKeys = operators.map((operator, iterator) => (
+  const operatorButtons = operators.map((operator, iterator) => (
     <Button
       handleBtnPress={handleBtnPress}
       key={`${operator}${iterator}`}
@@ -28,8 +26,8 @@ const Keypad = ({ operators, callOperator, handleBtnPress, numbers, setOperator,
 
   return (
     <div className="keypad-container">
-      <div className="numbers-container">{numberKeys}</div>
-      <div className="operators-container">{operatorKeys}</div>
+      <div className="numbers-container">{numberButtons}</div>
+      <div className="operators-container">{operatorButtons}</div>
       <div className="submit-container">
         <Button 
           handleBtnPress={handleBtnPress} 
