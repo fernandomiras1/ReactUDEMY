@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './Calculator.css';
 
 import Display from '../Display/Display';
@@ -6,122 +6,110 @@ import Keypad from '../Keypad/Keypad';
 import NumbeRotation from '../NumbeRotation/NumbeRotation';
 import './Calculator.css';
 
-class Calculator extends Component {
-  state = {
-    displayValue: '0',
-    numbers: ['7', '8', '9', '4', '5', '6', '1', '2', '3', '0', '.', '<='],
-    operators: ['/', '*', '-', '+'],
-    selectedOperator: '',
-    storedValue: '',
-    numberRotation: [1, 2, 3, 4, 5],
-  };
+const Calculator = () => {
 
-  componentDidMount = () => {
-    document.addEventListener('keydown', this.handleBtnPress);
-  };
+  const [displayValue, setDisplayValue] = useState('0')
+  const [storedValue, setStoredValue] = useState('')
+  const [numberRotation, setNumberRotation ] = useState([1, 2, 3, 4, 5])
+  const [selectedOperator, setSelectedOperator] = useState('')
 
-  componentWillUnmount = () => {
-    document.removeEventListener('keydown', this.handleBtnPress);
-  };
+  const numbers = ['7', '8', '9', '4', '5', '6', '1', '2', '3', '0', '.', '<=']
+  const operators = ['/', '*', '-', '+']
 
-  callOperator = () => {
-    let { displayValue, selectedOperator, storedValue } = this.state;
+  const callOperator = () => {
     const updateStoredValue = displayValue;
-    
-    displayValue = parseFloat(displayValue);
-    storedValue = parseFloat(storedValue);
 
+    let operationResult = ''
     switch (selectedOperator) {
       case '+':
-        displayValue = storedValue + displayValue;
+        operationResult = parseFloat(storedValue) + parseFloat(displayValue);
         break;
       case '-':
-        displayValue = storedValue - displayValue;
+        operationResult = parseFloat(storedValue) - parseFloat(displayValue);
         break;
       case '*':
-        displayValue = storedValue * displayValue;
+        operationResult = parseFloat(storedValue) * parseFloat(displayValue);
         break;
       case '/':
-        displayValue = storedValue / displayValue;
+        operationResult = parseFloat(storedValue) / parseFloat(displayValue);
         break;
       default:
-        displayValue = '0';
+        operationResult = '0';
     }
 
-    displayValue = displayValue.toString();
-    selectedOperator = '';
-    if (displayValue === 'NaN' || displayValue === 'Infinity') displayValue = '0';
+    if (operationResult === 'NaN' || operationResult === 'Infinity') operationResult = '0';
+    setDisplayValue(operationResult.toString())
+    setSelectedOperator('')
+    setStoredValue(updateStoredValue)
+  }
 
-    this.setState({ displayValue, selectedOperator, storedValue: updateStoredValue });
-  };
-
-  handleBtnPress = (event) => {
-    const { numbers, operators } = this.state;
-
-    if (event.key === 'Backspace') this.updateDisplay('<=');
-    if (event.key === 'Enter' || event.key === '=') this.callOperator();
+  const handleBtnPress = (event) => {
+    console.log('handleBtnPress', event.key);
+    if (event.key === 'Backspace') updateDisplay('<=');
+    if (event.key === 'Enter' || event.key === '=') callOperator();
 
     numbers.forEach((number) => {
-      if (event.key === number) this.updateDisplay(number);
+      if (event.key === number) updateDisplay(number);
     });
 
     operators.forEach((operator) => {
-      if (event.key === operator) this.setOperator(operator);
+      if (event.key === operator) setOperator(operator);
     });
   };
 
-  setOperator = (value) => {
-    let { displayValue, selectedOperator, storedValue } = this.state;
-
+  const setOperator = (value) => {
+    console.log('setOperator', selectedOperator);
     if (selectedOperator === '') {
-      storedValue = displayValue;
-      displayValue = '';
-      selectedOperator = value;
-    } else {
-      selectedOperator = value;
+      setStoredValue(displayValue)
+      setDisplayValue('')
     }
-    this.setState({ displayValue, selectedOperator, storedValue });
+    setSelectedOperator(value);
   };
 
-  numbersRotation = (numbers) => {
+  const numbersRotation = (numbers) => {
     numbers.push(numbers.shift())
     return numbers
   }
 
-  updateDisplay = (value) => {
-    let { displayValue, numberRotation } = this.state;
+  const updateDisplay = (value) => {
 
-    if (value === '.' && displayValue.includes('.')) value = '';
+    let updateValue = displayValue
+    if (value === '.' && updateValue.includes('.')) value = '';
 
     if (value === '<=') {
-      displayValue = displayValue.substr(0, displayValue.length - 1);
-      this.numbersRotation(numberRotation);
-      if (displayValue === '') displayValue = '0';
+      updateValue = updateValue.substr(0, displayValue.length - 1)
+      if (updateValue === '') updateValue = '0'
     } else {
-      displayValue === '0' ? (displayValue = value) : (displayValue += value);
+      updateValue === '0' ? (updateValue = value) : (updateValue += value);
     }
 
-    this.setState({ displayValue });
+    setDisplayValue(updateValue)
   };
 
-  render() {
-    const { displayValue, numbers, operators, numberRotation } = this.state;
-
-    return (
-      <div className="calculator-container">
-        <NumbeRotation value={numberRotation} />
-        <Display displayValue={displayValue} />
-        <Keypad
-          handleBtnPress={this.handleBtnPress}
-          operators={operators}
-          callOperator={this.callOperator}
-          numbers={numbers}
-          setOperator={this.setOperator}
-          updateDisplay={this.updateDisplay}
-        />
-      </div>
-    );
-  }
+  return (
+    <div className="calculator-container">
+      <button type="button"
+        onClick={(e) => {
+          e.preventDefault()
+          setNumberRotation(numbersRotation(numberRotation))
+          console.log('numberRotation', numberRotation);
+          // console.log(numbersRotation(numberRotation) );
+          // setDisplayValue(numberRotation.toString())
+        }}
+      >Number rotation.
+      </button>
+      <NumbeRotation value={numberRotation} />
+      <Display displayValue={displayValue} />
+      <Keypad
+        handleBtnPress={handleBtnPress}
+        operators={operators}
+        callOperator={callOperator}
+        numbers={numbers}
+        setOperator={setOperator}
+        updateDisplay={updateDisplay}
+      />
+    </div>
+  )
 }
 
 export default Calculator;
