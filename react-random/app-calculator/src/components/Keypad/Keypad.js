@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 import './Keypad.css';
 
-const Keypad = ({ operators, callOperator, handleBtnPress, numbers, setOperator, updateDisplay }) => {
+const Keypad = ({ operators, callOperator, numbers, setOperator, updateDisplay }) => {
   const numberButtons = numbers.map((number, iterator) => (
     <Button
-      handleBtnPress={handleBtnPress}
       key={`${number}${iterator}`}
       btnType="number-btn"
       btnValue={number}
@@ -16,7 +15,6 @@ const Keypad = ({ operators, callOperator, handleBtnPress, numbers, setOperator,
 
   const operatorButtons = operators.map((operator, iterator) => (
     <Button
-      handleBtnPress={handleBtnPress}
       key={`${operator}${iterator}`}
       btnType="operator-btn"
       btnValue={operator}
@@ -30,7 +28,6 @@ const Keypad = ({ operators, callOperator, handleBtnPress, numbers, setOperator,
       <div className="operators-container">{operatorButtons}</div>
       <div className="submit-container">
         <Button 
-          handleBtnPress={handleBtnPress} 
           btnType="submit-btn" 
           btnValue="=" 
           btnAction={callOperator}
@@ -42,7 +39,6 @@ const Keypad = ({ operators, callOperator, handleBtnPress, numbers, setOperator,
 
 Keypad.propTypes = {
   callOperator: PropTypes.func.isRequired,
-  handleBtnPress: PropTypes.func.isRequired,
   numbers: PropTypes.array.isRequired,
   operators: PropTypes.array.isRequired,
   setOperator: PropTypes.func.isRequired,
