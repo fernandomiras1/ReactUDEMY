@@ -11,7 +11,7 @@ import { addHistoryItem } from '../../actions/history';
 import './Calculator.css';
 import History from '../History/History';
 
-const numbers = ['7', '8', '9', '4', '5', '6', '1', '2', '3', '0', '.', '<=']
+const numbers = ['7', '8', '9', '4', '5', '6', '1', '2', '3', '0', '.']
 const operators = ['/', '*', '-', '+']
 
 const Calculator = ({
