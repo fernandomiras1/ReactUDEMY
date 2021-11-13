@@ -10,6 +10,7 @@ import { addHistoryItem } from '../../actions/history';
 
 import './Calculator.css';
 import History from '../History/History';
+import NumbeRotation from '../NumbeRotation/NumbeRotation';
 
 const numbers = ['7', '8', '9', '4', '5', '6', '1', '2', '3', '0', '.']
 const operators = ['/', '*', '-', '+']
@@ -21,6 +22,7 @@ const Calculator = ({
   addHistoryItem
 }) =>   <div className="calculator-container">
 <div className="container-fluid">
+  <NumbeRotation />
   <Display displayValue={expression} />
   <div className="main">
     <div className="container-keypad">
