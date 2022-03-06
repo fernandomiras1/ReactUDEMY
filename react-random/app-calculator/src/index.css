@@ -1,0 +1,55 @@
+/*
+global variables
+*/
+
+:root {
+  --action-btn-color: #213747;
+  --action-btn-color-hover: #142c3e;
+  --calculator-background-color: #29485f;
+  --display-background-color: #878787;
+  --number-btn-color: #29485f;
+  --submit-btn-color: #ce3406;
+  --submit-btn-color-hover: #f73a00;
+
+  /* font */
+  --main-font: monospace;
+
+  /* font colors */
+  --display-text-color:black;
+  --btn-text-color: #d3d3d3;
+
+  /* font sizes */
+  --display-text-size: 2.7em;
+  --btn-text-size: 2.7em;
+
+  /* font weights */
+  --display-text-weight: 400;
+
+  /* calculator dimensions */
+  --calculator-height: 72%;
+  --calculator-width: 22%;
+
+  /* display dimensions */
+  --display-height: 40px;
+  --display-width: 92%;
+
+  /* keypad dimensions */
+  --keypad-height: 72%;
+  --keypad-width: 96%;
+}
+
+body,
+div,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 1024px) {
+  :root {
+    --display-text-size: 3em;
+    --btn-text-size: 3em;
+    --calculator-height: 100%;
+    --calculator-width: 95%;
+  }
+}
