@@ -1,0 +1,25 @@
+{
+  "name": "twitter-autocomplete",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "algoliasearch": "^4.12.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-instantsearch-hooks": "^6.22.0",
+    "textarea-caret": "^3.1.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "1.0.7",
+    "standard": "16.0.4",
+    "vite": "2.8.0"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/standard/eslintrc.json"
+  }
+}
