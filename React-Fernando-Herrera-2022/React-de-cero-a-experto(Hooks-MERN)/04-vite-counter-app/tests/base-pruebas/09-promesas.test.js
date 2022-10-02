@@ -14,9 +14,9 @@ describe('Pruebas en 09-promesas', () => {
                     name: 'Batman',
                     owner: 'DC'
                 });
-
+                // El done, va a esperar que termine de correr todas las prubeas y luego va a evaluiar el expect dentro del then , de la promesa
                 done();
-            });
+            }); 
         
     });
 

@@ -1,41 +1,47 @@
+// screen: Guarda la ultima version actualizada del DOM. Es una forma limpia de trabajar con el DOM
 import { render, screen } from '@testing-library/react';
 import { FirstApp } from '../src/FirstApp';
 
+/**
+ * 
+ * MEJORAMOS LOS TEST DEL FirstApp.test.jsx
+ */
 
 describe('Pruebas en <FirstApp />', () => {
 
-    const title    = 'Hola, Soy Goku';
+    const title = 'Hola, Soy Goku';
     const subTitle = 'Soy un subtitulo';
-    
+
     test('debe de hacer match con el snapshot', () => {
-        
-        const { container } = render( <FirstApp title={ title } /> );
-        expect( container ).toMatchSnapshot();
+
+        const { container } = render(<FirstApp title={title} />);
+        expect(container).toMatchSnapshot();
 
     });
 
     test('debe de mostrar el mensaje "Hola, Soy Goku"', () => {
-        
-        render( <FirstApp title={ title } /> );
-        expect( screen.getByText(title) ).toBeTruthy();
+
+        render(<FirstApp title={title} />);
+        // Guarda la ultima version actualizada del DOM. Es una forma limpia de trabajar con el DOM
+        expect(screen.getByText(title)).toBeTruthy();
         // screen.debug();
     });
 
     test('debe de mostrar el titulo en un h1', () => {
-        render( <FirstApp title={ title } /> );
-        expect( screen.getByRole('heading', { level: 1 }).innerHTML ).toContain( title );
+        render(<FirstApp title={title} />);
+        expect(screen.getByRole('heading', { level: 1 }).innerHTML).toContain(title);
     });
 
     test('debe de mostrar el subtitulo enviado por props', () => {
-        
-        render( 
-            <FirstApp 
-                title={ title }
-                subTitle={ subTitle }
-            />  
+
+        render(
+            <FirstApp
+                title={title}
+                subTitle={subTitle}
+            />
         );
 
-        expect( screen.getAllByText(subTitle).length ).toBe(2);
+        expect(screen.getAllByText(subTitle).length).toBe(2);
 
     });
 
