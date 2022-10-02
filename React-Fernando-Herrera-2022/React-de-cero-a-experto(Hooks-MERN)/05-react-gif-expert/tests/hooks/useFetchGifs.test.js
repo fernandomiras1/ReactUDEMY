@@ -2,7 +2,7 @@ import { renderHook, waitFor } from '@testing-library/react';
 import { useFetchGifs } from '../../src/hooks/useFetchGifs';
 
 
-describe('Pruebas en el kook useFetchGifs', () => {
+describe('Pruebas en el kook useFetchGifs', () => { 
     
     test('debe de regresar el estado inicial', () => {
 
@@ -18,6 +18,9 @@ describe('Pruebas en el kook useFetchGifs', () => {
 
         const { result } = renderHook( () => useFetchGifs('One Punch') );
         
+        /**
+         * Espera a que esa condicion se cumpla, que las imagenes sea mayor a 0
+         */
         await waitFor(
             () => expect( result.current.images.length ).toBeGreaterThan(0)
         );
