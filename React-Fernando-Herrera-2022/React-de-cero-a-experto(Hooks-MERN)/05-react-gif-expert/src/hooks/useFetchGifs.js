@@ -14,7 +14,7 @@ export const useFetchGifs = ( category ) => {
     
     useEffect( () => {
         getImages();
-    }, []);
+    }, []); // Si ponemos la dependencia empy, se va a llamar una unica vez cunado se crea el componente.
 
 
 

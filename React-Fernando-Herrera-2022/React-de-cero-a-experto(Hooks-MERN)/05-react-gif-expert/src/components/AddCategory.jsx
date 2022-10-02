@@ -1,30 +1,34 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-
+// rafc
 export const AddCategory = ({ onNewCategory }) => {
 
-    const [ inputValue, setInputValue ] = useState('');
+    // usestateSnippet
+    const [inputValue, setInputValue] = useState('');
 
     const onInputChange = ({ target }) => {
-        setInputValue( target.value );
+        setInputValue(target.value);
     }
 
-    const onSubmit = ( event ) => {
+    const onSubmit = (event) => {
         event.preventDefault();
-        if( inputValue.trim().length <= 1) return;
+        // Si tenemos mas de un caracter ingresa.
+        if (inputValue.trim().length <= 1) return;
 
         // setCategories( categories => [ inputValue, ...categories ]);
         setInputValue('');
-        onNewCategory( inputValue.trim() );
+        // Emite el valor insertado al Padre.
+        // onNewCa -- Cuando inicia con on quiere decir que esta emitiendo algo. Sumamente importante.
+        onNewCategory(inputValue.trim());
     }
 
     return (
-        <form onSubmit={ onSubmit } aria-label="form">
-            <input 
+        <form onSubmit={onSubmit} aria-label="form">
+            <input
                 type="text"
                 placeholder="Buscar gifs"
-                value={ inputValue }
-                onChange={ onInputChange }
+                value={inputValue}
+                onChange={onInputChange}
             />
         </form>
     )
