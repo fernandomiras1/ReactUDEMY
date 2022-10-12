@@ -1,37 +1,45 @@
-import { Link, NavLink } from 'react-router-dom';
-
+import { Link, NavLink } from "react-router-dom";
 
 export const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark rounded-3">
-        <div className="container-fluid">
+      <div className="container-fluid">
+        <Link className="navbar-brand" to="/">
+          useContext
+        </Link>
 
-            <Link className="navbar-brand" to="/">useContext</Link>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            {/* Te permite poner la clase active por eso hay que usar el NavLink, regresa un boolean preguntando si esta activo (isActive)  */}
+            <NavLink
+              className={({ isActive }) =>
+                `nav-link ${isActive ? "active" : ""}`
+              }
+              to="/"
+            >
+              Home
+            </NavLink>
 
-            <div className="collapse navbar-collapse" id="navbarNav">
-                <ul className="navbar-nav">
-                    
-                    <NavLink 
-                        className={ ({ isActive }) => `nav-link ${ isActive ? 'active' : '' }`}
-                        to="/">
-                        Home
-                    </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                `nav-link ${isActive ? "active" : ""}`
+              }
+              to="/about"
+            >
+              About
+            </NavLink>
 
-
-                    <NavLink 
-                        className={ ({ isActive }) => `nav-link ${ isActive ? 'active' : '' }`}
-                        to="/about">
-                        About
-                    </NavLink>
-
-                    <NavLink 
-                        className={ ({ isActive }) => `nav-link ${ isActive ? 'active' : '' }`}
-                        to="/Login">
-                        Login
-                    </NavLink>
-                </ul>
-            </div>
+            <NavLink
+              className={({ isActive }) =>
+                `nav-link ${isActive ? "active" : ""}`
+              }
+              to="/Login"
+            >
+              Login
+            </NavLink>
+          </ul>
         </div>
+      </div>
     </nav>
-  )
-}
+  );
+};
