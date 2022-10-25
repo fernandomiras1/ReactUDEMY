@@ -6,12 +6,15 @@ import { AuthContext } from '../auth';
 
 export const PrivateRoute = ({ children }) => {
 
-    const { logged } = useContext( AuthContext );
+    // Verificamos si esta autenticado
+    const { logged } = useContext(AuthContext);
+
+    // Obtenemos el ultmo path esto viene de react 6 
     const { pathname, search } = useLocation();
-    
+
     const lastPath = pathname + search;
-    localStorage.setItem('lastPath', lastPath );
-    
+    localStorage.setItem('lastPath', lastPath);
+
 
     return (logged)
         ? children
