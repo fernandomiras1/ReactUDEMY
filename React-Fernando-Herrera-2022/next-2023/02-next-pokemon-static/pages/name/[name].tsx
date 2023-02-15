@@ -4,8 +4,8 @@ import confetti from 'canvas-confetti';
 import { useEffect, useState } from 'react';
 import { pokeApi } from '../../api';
 import { Layout } from '../../components/layouts';
-import { Pokemon } from '../../interfaces';
-import { localFavorites } from '../../utils';
+import { Pokemon, PokemonListResponse } from '../../interfaces';
+import { getPokemonInfo, localFavorites } from '../../utils';
 
 interface Props {
   pokemon: Pokemon;
@@ -21,7 +21,7 @@ interface Props {
  *  Le ponemos el nombre del argumento que esta esperando en este caso seria el id por eso se llama [id].tsx
  */
 
-const PokemonPage: NextPage<Props> = ({ pokemon }) => {
+const PokemonByNamePage: NextPage<Props> = ({ pokemon }) => {
 
 
     const [isInFavorites, setIsInFavorites] = useState( localFavorites.existInFavorites( pokemon.id ) );
@@ -139,35 +139,37 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
  * Se generara en el build time, es decir se generara 151 paginas web de esta forma pokemon/1 to 151, es decir generara 151 paginas HTML 
  *  
  */
+
 export const getStaticPaths: GetStaticPaths = async (ctx) => {
 
-  const pokemons151 = [...Array(151)].map( ( value, index ) => `${ index + 1 }` );
-
-  return {
-    paths: pokemons151.map( id => ({
-      params: { id }
-    })),
-    // es deicir si la pag no fue renderizad aque falle, es decir que no existe 404 
-    fallback: false
-  }
-}
-
-
-// Aca pasamos los params primero se renderiza getStaticPaths y luego pasa a getStaticProps
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { id } = params as { id: string };
+    const { data } = await pokeApi.get<PokemonListResponse>('/pokemon?limit=151');
+    const pokemonNames: string[] = data.results.map( pokemon => pokemon.name );
   
-  const { data } = await pokeApi.get<Pokemon>(`/pokemon/${ id }`);
-
-  return {
-    props: {
-      pokemon: data
+  
+    return {
+      paths: pokemonNames.map( name => ({
+        params: { name }
+      })),
+      fallback: false
     }
   }
-}
+  
+  
+  
+  export const getStaticProps: GetStaticProps = async ({ params }) => {
+    
+    const { name } = params as { name: string };
+  
+    return {
+      props: {
+        pokemon: await getPokemonInfo( name )
+      }
+    }
+  }
+  
+  
+  
 
 
 
-
-
-export default PokemonPage;
+export default PokemonByNamePage;
