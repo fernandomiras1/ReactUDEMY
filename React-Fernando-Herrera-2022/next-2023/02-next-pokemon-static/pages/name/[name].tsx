@@ -150,7 +150,11 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
       paths: pokemonNames.map( name => ({
         params: { name }
       })),
-      fallback: false
+      // fallback: false
+      // (fallback: false): Es deicir si la pag no fue renderizad aque falle, es decir que no existe 404 
+      // fallback: false
+      //  (fallback: blocking): Nos permite crear nuevo contenido estatico a partir de un llamdoa a la API 200 Correctamente, por ejemplo mostramos 151, pero si buscamos el id 152 que no lo tenemos statico, es decir, o esta creado en el build de la APP. no va a permitir podes Crear ese HTML y que quede startico
+      fallback: 'blocking'
     }
   }
   
@@ -159,11 +163,27 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
   export const getStaticProps: GetStaticProps = async ({ params }) => {
     
     const { name } = params as { name: string };
+
+    const pokemon =  await getPokemonInfo( name )
+
+    // El id No exite en la API , LA API ROMPE
+    // Lo redireccionamos a la HOME
+    if (!pokemon) {
+    
+      return {
+        redirect: {
+          destination: '/',
+          permanent: false
+        }
+      }
+    }
   
     return {
       props: {
-        pokemon: await getPokemonInfo( name )
-      }
+        pokemon
+      },
+      // Vuelve hacer un llamado a la API y a refresacar la INFO. Cada sierto lapzo de tiempo
+      revalidate: 86400 // Cada 24 horas ---> 60 * 60 * 24 // En segundos
     }
   }
   
