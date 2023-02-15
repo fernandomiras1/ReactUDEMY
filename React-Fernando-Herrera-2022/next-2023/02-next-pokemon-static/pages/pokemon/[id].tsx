@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { pokeApi } from '../../api';
 import { Layout } from '../../components/layouts';
 import { Pokemon } from '../../interfaces';
-import { localFavorites } from '../../utils';
+import { getPokemonInfo, localFavorites } from '../../utils';
 
 interface Props {
   pokemon: Pokemon;
@@ -157,11 +157,10 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { id } = params as { id: string };
   
-  const { data } = await pokeApi.get<Pokemon>(`/pokemon/${ id }`);
 
   return {
     props: {
-      pokemon: data
+      pokemon: await getPokemonInfo( id )
     }
   }
 }
