@@ -9,6 +9,15 @@ interface Props {
   pokemon: Pokemon;
 }
 
+/**
+ * 
+ *  IMPORTANTE 
+ * 
+ * - QUeremos navegar a algo que sea pokemon/1 ( es decir le pasamos el ID)
+ * - Para eso la carpeta se tiene que llamar como en path en este caso pokemon. 
+ * - Y creamos este archico con el ID generico que va a recibir como parametro  /1
+ *  Le ponemos el nombre del argumento que esta esperando en este caso seria el id por eso se llama [id].tsx
+ */
 
 const PokemonPage: NextPage<Props> = ({ pokemon }) => {
 
@@ -93,7 +102,13 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
 
 
 // You should use getStaticPaths if you’re statically pre-rendering pages that use dynamic routes
-
+/**
+ * 
+ * Usamos este metodo, ya que tenemos este componete que va a ser dinamico porq tiene las llaves cuadras. 
+ * es decir tenemos n ids. Por eso hay que simular los 151 path para que cree este HTML. 
+ * Se generara en el build time, es decir se generara 151 paginas web de esta forma pokemon/1 to 151, es decir generara 151 paginas HTML 
+ *  
+ */
 export const getStaticPaths: GetStaticPaths = async (ctx) => {
 
   const pokemons151 = [...Array(151)].map( ( value, index ) => `${ index + 1 }` );
@@ -102,14 +117,14 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
     paths: pokemons151.map( id => ({
       params: { id }
     })),
+    // es deicir si la pag no fue renderizad aque falle, es decir que no existe 404 
     fallback: false
   }
 }
 
 
-
+// Aca pasamos los params primero se renderiza getStaticPaths y luego pasa a getStaticProps
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  
   const { id } = params as { id: string };
   
   const { data } = await pokeApi.get<Pokemon>(`/pokemon/${ id }`);

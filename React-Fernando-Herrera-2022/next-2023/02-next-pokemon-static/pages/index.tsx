@@ -16,7 +16,7 @@ const HomePage: NextPage<Props> = ({ pokemons }) => {
   return (
     <Layout title='Listado de Pokémons'>
       
-      <Grid.Container gap={ 2 } justify='flex-start'>
+      <Grid.Container gap={ 2 } justify='flex-start'> 
         {
           pokemons.map( ( pokemon ) => (
             <PokemonCard key={ pokemon.id } pokemon={ pokemon } />
@@ -28,7 +28,15 @@ const HomePage: NextPage<Props> = ({ pokemons }) => {
   )
 }
 
-
+/**
+ * 
+ * Usamos la Estragenia de Statico.
+ * 
+ * 
+ * Esta funcion se ejecuta en tiempo de build yarn build. 
+ * Y se ejecuta del lado del Servicos. Es cuando sabemos que siempre va a mostar esa misma inforamcion y no va a cambiar.
+ * Tambien solo se debe usar dentro de las pagina y no en los componentes 
+ */
 export const getStaticProps: GetStaticProps = async (ctx) => {
   
   const { data } = await pokeApi.get<PokemonListResponse>('/pokemon?limit=151');
