@@ -1,6 +1,4 @@
+export * as db from "./db";
+export * as dbEntries from "./dbEntries";
 
-
-export * as db from './db';
-
-
-export * from './seed-data';
+export * from "./seed-data";
