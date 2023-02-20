@@ -32,3 +32,9 @@ Llamara:
 ```
 http://localhost:3000/api/seed
 ```
+
+## Es una API Que utiliza cache, si al API no cambio te regresa el cache sin necesidad de llamar nuevamente.
+
+```
+https://nextjs.org/docs/basic-features/data-fetching/client-side#client-side-data-fetching-with-swr
+```
