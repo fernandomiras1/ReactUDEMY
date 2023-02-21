@@ -90,7 +90,7 @@ const ProductPage: NextPage<Props> = ({ product }) => {
                 // selectedSize={ product.sizes[2] }
                 sizes={product.sizes}
                 selectedSize={tempCartProduct.size}
-                onSelectedSize={selectedSize}
+                onSelectedSize={selectedSize} // Emite la talla seleccionada.
               />
             </Box>
 

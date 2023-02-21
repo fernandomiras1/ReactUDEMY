@@ -29,6 +29,8 @@ export const CartProvider: FC = ({ children }) => {
       const cookieProducts = Cookie.get("cart")
         ? JSON.parse(Cookie.get("cart")!)
         : [];
+
+      // Agregamos el carrito guardado en las Cookies.
       dispatch({
         type: "[Cart] - LoadCart from cookies | storage",
         payload: cookieProducts,
@@ -41,6 +43,7 @@ export const CartProvider: FC = ({ children }) => {
     }
   }, []);
 
+  // Cuando el Carrito cambie lo agregamos en la Cookie. Para manter el carrito
   useEffect(() => {
     Cookie.set("cart", JSON.stringify(state.cart));
   }, [state.cart]);
