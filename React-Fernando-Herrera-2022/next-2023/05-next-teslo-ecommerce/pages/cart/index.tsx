@@ -7,11 +7,29 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
+import { useContext, useEffect } from "react";
+import { useRouter } from "next/router";
 
 import { ShopLayout } from "../../components/layouts/ShopLayout";
 import { CartList, OrderSummary } from "../../components/cart";
+import { CartContext } from "../../context";
 
 const CartPage = () => {
+  const { isLoaded, cart } = useContext(CartContext);
+  const router = useRouter();
+
+  useEffect(() => {
+    // Sacamos a la persona de esta pantalla porque no tiene carrito
+    if (isLoaded && cart.length === 0) {
+      router.replace("/cart/empty");
+    }
+  }, [isLoaded, cart, router]);
+
+  // Quitamos el flash que hay, nos aseguramos que no renderize nada
+  if (!isLoaded || cart.length === 0) {
+    return <></>;
+  }
+
   return (
     <ShopLayout
       title="Carrito - 3"
@@ -34,7 +52,12 @@ const CartPage = () => {
               <OrderSummary />
 
               <Box sx={{ mt: 3 }}>
-                <Button color="secondary" className="circular-btn" fullWidth>
+                <Button
+                  color="secondary"
+                  className="circular-btn"
+                  fullWidth
+                  href="/checkout/address"
+                >
                   Checkout
                 </Button>
               </Box>
