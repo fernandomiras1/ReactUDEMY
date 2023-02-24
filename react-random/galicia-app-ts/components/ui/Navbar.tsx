@@ -18,8 +18,24 @@ export const UINavbar = () => {
   return (
     <Navbar isBordered variant="floating">
       <Navbar.Brand>
-        <Text b color="inherit" hideIn="xs">
-          REACT
+        <Text
+          h1
+          size={60}
+          css={{
+            textGradient: "45deg, $yellow600 -20%, $red600 100%",
+          }}
+          weight="bold"
+        >
+          Galicia
+        </Text>
+        <Text
+          size={20}
+          css={{
+            textGradient: "45deg, $purple600 -20%, $pink600 100%",
+          }}
+          weight="bold"
+        >
+          v.1.0.1
         </Text>
       </Navbar.Brand>
       <Navbar.Content hideIn="xs">

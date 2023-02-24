@@ -130,7 +130,7 @@ export function downloadQRCode(
 
     mergeImages([
       {
-        src: QR_NAVE_B64,
+        src: position?.imgBase64 || QR_NAVE_B64,
       },
       {
         src: `data:image/png;base64,${content}`,

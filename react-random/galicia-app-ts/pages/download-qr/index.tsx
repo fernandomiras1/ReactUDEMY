@@ -6,10 +6,15 @@ import {
   Text,
   Link,
   Button,
+  Input,
   Image,
   Modal,
   useModal,
+  Textarea,
+  Spacer,
   Container,
+  Row,
+  Col,
 } from "@nextui-org/react";
 import { Layout } from "../../components/layouts";
 
@@ -19,6 +24,9 @@ import {
   downloadQRCode,
 } from "../../utils/download-qr-code";
 import { useForm } from "../../hooks/useForm";
+import { confettiEffect } from "../../utils/canvas-confetti";
+import { QR_NAVE_B64 } from "../../utils/qr-code-template";
+import { ErrorMessage } from "../../components/ui/ErrorMessage";
 
 const dataDownloadQR = [
   {
@@ -35,6 +43,7 @@ export type formData = {
   yContentQR: number;
   xNameQR: number;
   yNameQR: number;
+  imgBase64: string;
 };
 
 const formData: formData = {
@@ -42,18 +51,22 @@ const formData: formData = {
   yContentQR: 950,
   xNameQR: 430,
   yNameQR: 1620,
+  imgBase64: QR_NAVE_B64,
 };
 
 const DownloadQrPage = () => {
   const { setVisible, bindings } = useModal();
-  const [base64, setbase64] = useState("");
+  const [base64, setbase64] = useState(formData.imgBase64);
+  const [isError, setIsError] = useState(false);
   const { formState, onInputChange } = useForm(formData);
 
-  const { xContentQR, yContentQR, xNameQR, yNameQR }: any = formState;
+  const { xContentQR, yContentQR, xNameQR, yNameQR, imgBase64 }: any =
+    formState;
 
   const onDownloadSimpleQR = () => {
     console.log("onDownloadSimpleQR");
-    downloadQRCode(dataDownloadQR[0].qr, `${dataDownloadQR[0].qrName}`);
+    confettiEffect();
+    // downloadQRCode(dataDownloadQR[0].qr, `${dataDownloadQR[0].qrName}`);
   };
 
   const onDownloadDobleQR = () => {
@@ -76,7 +89,6 @@ const DownloadQrPage = () => {
 
   const onGenerateElementDobleQR = () => {
     generateElementDobleQRCode(dataDownloadQR).then((b64) => {
-      console.log("Imagen", b64);
       setbase64(b64);
       setVisible(true);
     });
@@ -89,25 +101,67 @@ const DownloadQrPage = () => {
       `${dataDownloadQR[0].qrName}`,
       formState as formData,
       false
-    ).then((b64: any) => {
-      console.log("Imagen", b64);
-      setbase64(b64);
-      // setVisible(true);
-    });
+    )
+      .then((b64: any) => {
+        setIsError(false);
+        setbase64(b64);
+        // setVisible(true);
+      })
+      .catch((err) => {
+        setIsError(true);
+        console.log(err);
+      });
   };
 
   return (
     <Layout title="Delay Page">
+      <Text
+        h1
+        size={60}
+        css={{
+          textGradient: "45deg, $blue600 -20%, $pink600 50%",
+        }}
+        weight="bold"
+      >
+        Download QR
+      </Text>
       <Grid.Container gap={2} justify="center">
         <Grid>
           <Button color="gradient" onClick={onDownloadSimpleQR}>
-            Simple QR download
+            Simple
           </Button>
         </Grid>
         <Grid>
           <Button color="gradient" onClick={onDownloadDobleQR}>
-            Doble QR download
+            Doble
           </Button>
+        </Grid>
+      </Grid.Container>
+
+      <Spacer y={0.5} />
+      <Text
+        h1
+        size={60}
+        css={{
+          textGradient: "45deg, $blue600 -20%, $pink600 50%",
+        }}
+        weight="bold"
+      >
+        Generate Visualization
+      </Text>
+
+      <Grid.Container gap={2} justify="center">
+        <Grid xs={12}>
+          <Textarea
+            fullWidth
+            placeholder="Imagen en base64"
+            labelPlaceholder="Imagen en base64"
+            name="imgBase64"
+            initialValue={imgBase64}
+            onChange={onInputChange}
+            status="primary"
+            rows={6}
+          />
         </Grid>
         <Grid>
           <Button color="gradient" onClick={onGenerateElementSimpleQR}>
@@ -130,54 +184,80 @@ const DownloadQrPage = () => {
       >
         <Modal.Header>
           <Text id="modal-title" size={18}>
-            <Container>
-              ContentQR:
-              <input
-                type="text"
-                placeholder="xContentQR"
-                name="xContentQR"
-                value={xContentQR}
-                onChange={onInputChange}
-              />
-              <input
-                type="text"
-                placeholder="yContentQR"
-                name="yContentQR"
-                value={yContentQR}
-                onChange={onInputChange}
-              />
-            </Container>
-            <Container>
-              NameQR:
-              <input
-                type="text"
-                placeholder="xNameQR"
-                name="xNameQR"
-                value={xNameQR}
-                onChange={onInputChange}
-              />
-              <input
-                type="text"
-                placeholder="yNameQR"
-                name="yNameQR"
-                value={yNameQR}
-                onChange={onInputChange}
-              />
-            </Container>
-            <button onClick={onGenerate}>Generate</button>
+            <Grid.Container
+              gap={2}
+              justify="center"
+              style={{ marginTop: "20px" }}
+            >
+              <Grid xs={2}>
+                <Input
+                  clearable
+                  underlined
+                  type="number"
+                  labelPlaceholder="Content in X"
+                  name="xContentQR"
+                  initialValue={xContentQR}
+                  onChange={onInputChange}
+                />
+              </Grid>
+              <Grid xs={2}>
+                <Input
+                  clearable
+                  underlined
+                  type="number"
+                  name="yContentQR"
+                  labelPlaceholder="Content in Y"
+                  initialValue={yContentQR}
+                  onChange={onInputChange}
+                />
+              </Grid>
+              <Grid xs={2}>
+                <Input
+                  clearable
+                  underlined
+                  type="number"
+                  name="xNameQR"
+                  labelPlaceholder="Label in X"
+                  initialValue={xNameQR}
+                  onChange={onInputChange}
+                />
+              </Grid>
+
+              <Grid xs={2}>
+                <Input
+                  clearable
+                  underlined
+                  type="number"
+                  name="yNameQR"
+                  labelPlaceholder="Label in Y"
+                  initialValue={yNameQR}
+                  onChange={onInputChange}
+                />
+              </Grid>
+              <Grid xs={2}>
+                <Button shadow color="primary" onClick={onGenerate} size="xs">
+                  Generate
+                </Button>
+              </Grid>
+            </Grid.Container>
+
+            {/* <button onClick={onGenerate}>Generate</button> */}
           </Text>
         </Modal.Header>
         <Modal.Body>
           <div id="modal-description">
-            <img src={base64} alt="" />
+            {isError ? (
+              <Grid.Container justify="center">
+                <ErrorMessage title={"Error"} message={"Couldn't load image"} />
+              </Grid.Container>
+            ) : (
+              <img src={base64} alt="" />
+            )}
           </div>
         </Modal.Body>
         <Modal.Footer>
           <Button auto flat color="error" onPress={() => setVisible(false)}>
             Close
-          </Button>
-          <Button auto onPress={() => setVisible(false)}>
-            Agree
           </Button>
         </Modal.Footer>
       </Modal>

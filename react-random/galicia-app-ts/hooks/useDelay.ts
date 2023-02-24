@@ -7,12 +7,12 @@ export const useDelay = (seg: number) => {
 
   useEffect(() => {
     timerDelayRef.current = setTimeout(() => {
-      console.log("SE para");
+      console.log("FINALIZA EL DELAY");
       setCompleted(true);
     }, seg * 1000);
 
     if (stop) {
-      console.log("Lipiar Delay desde otro componete");
+      console.log("DESTROY DELAY");
       clearTimeout(timerDelayRef.current);
     }
 

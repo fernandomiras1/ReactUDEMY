@@ -1,12 +1,16 @@
-import React, { Fragment, useEffect, useRef } from "react";
-import { Loading, Card, Grid, Text, Link } from "@nextui-org/react";
+import React, { useEffect, useRef } from "react";
+import { Loading, Text } from "@nextui-org/react";
 
 import { Layout } from "../../components/layouts";
 import { useDelay } from "../../hooks/useDelay";
 import { UICard } from "../../components/ui";
 
+// Setting Timers APIs
+const COMPLETED_DELAY_SEG = 5;
+const TIMER_CALL_API_SEG = 1;
+
 const DelayPage = () => {
-  const { completed, stop, setStop } = useDelay(10);
+  const { completed, stop, setStop } = useDelay(COMPLETED_DELAY_SEG);
 
   const timerRef: any = useRef(null);
 
@@ -36,18 +40,32 @@ const DelayPage = () => {
     timerRef.current = setInterval(() => {
       counter++;
       getAPI(counter);
-    }, 1000);
+    }, TIMER_CALL_API_SEG * 1000);
 
     if (completed) {
       clearInterval(timerRef.current);
     }
 
     return () => clearInterval(timerRef.current);
-  }, [completed, getAPI]);
+  }, [completed]);
 
   return (
     <Layout title="Delay Page">
-      {!stop && !completed && <Loading>Loading</Loading>}
+      {!stop && !completed && (
+        <Loading size="xl">
+          {" "}
+          <Text
+            h1
+            size={60}
+            css={{
+              textGradient: "45deg, $yellow600 -20%, $red600 100%",
+            }}
+            weight="bold"
+          >
+            Loading...
+          </Text>
+        </Loading>
+      )}
 
       {completed && (
         <UICard title="Error" message="Hubo un error al cargar QR" />
