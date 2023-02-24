@@ -1,20 +1,13 @@
-import React, { Fragment, useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import {
-  Loading,
-  Card,
   Grid,
   Text,
-  Link,
   Button,
   Input,
-  Image,
   Modal,
   useModal,
   Textarea,
   Spacer,
-  Container,
-  Row,
-  Col,
 } from "@nextui-org/react";
 import { Layout } from "../../components/layouts";
 

@@ -35,7 +35,7 @@ export const Layout: FC<Props> = ({ children, title }) => {
         style={{
           padding: "0px 20px",
           margin: "30px",
-          minHeight: "100vh",
+          minHeight: "100%",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
