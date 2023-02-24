@@ -118,44 +118,12 @@ function getTextBase64({ c, width = 850, height = 100, qrName }: any) {
   return c.toDataURL("image/jpeg", 1);
 }
 
-export function downloadQRCode(content: string, qrName: string) {
-  return new Promise((resolve, reject) => {
-    const c = document.createElement("canvas");
-    const base64Canvas = getTextBase64({ c, qrName });
-
-    mergeImages([
-      {
-        src: QR_NAVE_B64,
-      },
-      {
-        src: `data:image/png;base64,${content}`,
-        x: 500,
-        y: 950,
-      },
-      {
-        src: `${base64Canvas}`,
-        x: 430,
-        y: 1620,
-      },
-    ])
-      .then((b64) => {
-        let a = document.createElement("a");
-        a.href = b64;
-        a.download = `${qrName}.png`;
-        a.click();
-        resolve(true);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
-}
-
-export function generateElementSimpleQRCode(
+export function downloadQRCode(
   content: string,
   qrName: string,
-  data: formData
-): Promise<unknown> {
+  position?: formData,
+  download = true
+) {
   return new Promise((resolve, reject) => {
     const c = document.createElement("canvas");
     const base64Canvas = getTextBase64({ c, qrName });
@@ -166,20 +134,26 @@ export function generateElementSimpleQRCode(
       },
       {
         src: `data:image/png;base64,${content}`,
-        x: data.xContentQR,
-        y: data.yContentQR,
+        x: position?.xContentQR || 500,
+        y: position?.yContentQR || 950,
       },
       {
         src: `${base64Canvas}`,
-        x: data.xNameQR,
-        y: data.yNameQR,
+        x: position?.xNameQR || 430,
+        y: position?.yNameQR || 1620,
       },
     ])
       .then((b64) => {
         let a = document.createElement("a");
         a.href = b64;
 
-        resolve(a);
+        if (download) {
+          a.download = `${qrName}.png`;
+          a.click();
+          resolve(true);
+        } else {
+          resolve(a);
+        }
       })
       .catch((error) => {
         reject(error);

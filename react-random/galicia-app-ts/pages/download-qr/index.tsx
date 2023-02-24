@@ -14,7 +14,6 @@ import {
 import { Layout } from "../../components/layouts";
 
 import {
-  generateElementSimpleQRCode,
   generateElementDobleQRCode,
   downloadMultipleQR,
   downloadQRCode,
@@ -50,7 +49,8 @@ const DownloadQrPage = () => {
   const [base64, setbase64] = useState("");
   const { formState, onInputChange } = useForm(formData);
 
-  const { xContentQR, yContentQR, xNameQR, yNameQR } = formState;
+  const { xContentQR, yContentQR, xNameQR, yNameQR }: any = formState;
+
   const onDownloadSimpleQR = () => {
     console.log("onDownloadSimpleQR");
     downloadQRCode(dataDownloadQR[0].qr, `${dataDownloadQR[0].qrName}`);
@@ -84,10 +84,11 @@ const DownloadQrPage = () => {
 
   const onGenerate = () => {
     console.log("form formState", formState);
-    generateElementSimpleQRCode(
+    downloadQRCode(
       dataDownloadQR[0].qr,
       `${dataDownloadQR[0].qrName}`,
-      formState as formData
+      formState as formData,
+      false
     ).then((b64: any) => {
       console.log("Imagen", b64);
       setbase64(b64);
@@ -119,12 +120,7 @@ const DownloadQrPage = () => {
           </Button>
         </Grid>
       </Grid.Container>
-      {/* <Card css={{ mw: "400px" }}>
-        <Card.Body>
-          <Text>A basic card</Text>
-          <img src={base64} alt="" />
-        </Card.Body>
-      </Card> */}
+
       <Modal
         scroll
         width="900px"
