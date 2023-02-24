@@ -20,6 +20,7 @@ import { useForm } from "../../hooks/useForm";
 import { confettiEffect } from "../../utils/canvas-confetti";
 import { QR_NAVE_B64 } from "../../utils/qr-code-template";
 import { ErrorMessage } from "../../components/ui/ErrorMessage";
+import { inputForms } from "./static/simple-qr-form";
 
 const dataDownloadQR = [
   {
@@ -182,7 +183,20 @@ const DownloadQrPage = () => {
               justify="center"
               style={{ marginTop: "20px" }}
             >
-              <Grid xs={2}>
+              {inputForms.map(({ id, name, label }) => (
+                <Input
+                  key={id}
+                  clearable
+                  underlined
+                  type="number"
+                  labelPlaceholder={label}
+                  name={name}
+                  initialValue={(formState as any)[name]}
+                  onChange={onInputChange}
+                />
+              ))}
+
+              {/* <Grid xs={2}>
                 <Input
                   clearable
                   underlined
@@ -226,7 +240,7 @@ const DownloadQrPage = () => {
                   initialValue={yNameQR}
                   onChange={onInputChange}
                 />
-              </Grid>
+              </Grid> */}
               <Grid xs={2}>
                 <Button shadow color="primary" onClick={onGenerate} size="xs">
                   Generate
