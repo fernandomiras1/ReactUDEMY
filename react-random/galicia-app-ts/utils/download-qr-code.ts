@@ -1,13 +1,16 @@
 import mergeImages from "merge-images";
-import { formData } from "../pages/download-qr";
+import { QRDoubleSchema, QRSimpleSchema } from "../types/download-qr-schema";
 import { QR_NAVE_B64 } from "./qr-code-template";
-import { QR_NAVE_DOUBLE } from "./qr-code-template-doble";
+import { QR_NAVE_DOUBLE } from "./qr-code-template-double";
 
-export function downloadMultipleQR(content: any[]) {
+export function downloadMultipleQR(
+  content: any[],
+  position?: QRDoubleSchema,
+  download = true
+) {
   const firstQR = content[0];
   const secondQR = content[1];
-  console.log(firstQR);
-  console.log(secondQR);
+
   return new Promise((resolve, reject) => {
     const imgTextA = getTextBase64({
       c: document.createElement("canvas"),
@@ -19,82 +22,36 @@ export function downloadMultipleQR(content: any[]) {
     });
 
     mergeImages([
-      { src: QR_NAVE_DOUBLE },
+      { src: position?.imageBase64 || QR_NAVE_DOUBLE },
       {
         src: `data:image/png;base64,${firstQR.qr}`,
-        x: 280,
-        y: 450,
+        x: position?.xContentFirstQR || 280,
+        y: position?.yContentFirstQR || 450,
       },
       {
         src: `data:image/png;base64,${secondQR.qr}`,
-        x: 1520,
-        y: 450,
+        x: position?.xContentSecondQR || 1520,
+        y: position?.yContentSecondQR || 450,
       },
       {
         src: `${imgTextA}`,
-        x: 160,
-        y: 1120,
+        x: position?.xNameFirstQR || 160,
+        y: position?.yNameFirstQR || 1120,
       },
       {
         src: `${imgTextB}`,
-        x: 1405,
-        y: 1120,
+        x: position?.xNameSecondQR || 1405,
+        y: position?.yNameSecondQR || 1120,
       },
     ])
       .then((b64) => {
         let a = document.createElement("a");
         a.href = b64;
-        a.download = `${firstQR.qrName} - ${secondQR.qrName}.png`;
-        a.click();
-        resolve(true);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
-}
-
-export function generateElementDobleQRCode(content: any[]) {
-  const firstQR = content[0];
-  const secondQR = content[1];
-  console.log(firstQR);
-  console.log(secondQR);
-  return new Promise((resolve, reject) => {
-    const imgTextA = getTextBase64({
-      c: document.createElement("canvas"),
-      qrName: firstQR.qrName,
-    });
-    const imgTextB = getTextBase64({
-      c: document.createElement("canvas"),
-      qrName: secondQR.qrName,
-    });
-
-    mergeImages([
-      { src: QR_NAVE_DOUBLE },
-      {
-        src: `data:image/png;base64,${firstQR.qr}`,
-        x: 280,
-        y: 450,
-      },
-      {
-        src: `data:image/png;base64,${secondQR.qr}`,
-        x: 1520,
-        y: 450,
-      },
-      {
-        src: `${imgTextA}`,
-        x: 160,
-        y: 1120,
-      },
-      {
-        src: `${imgTextB}`,
-        x: 1405,
-        y: 1120,
-      },
-    ])
-      .then((b64) => {
-        let a = document.createElement("a");
-        a.href = b64;
+        if (download) {
+          a.download = `${firstQR.qrName} - ${secondQR.qrName}.png`;
+          a.click();
+          return resolve(true);
+        }
 
         resolve(a);
       })
@@ -121,7 +78,7 @@ function getTextBase64({ c, width = 850, height = 100, qrName }: any) {
 export function downloadQRCode(
   content: string,
   qrName: string,
-  position?: formData,
+  position?: QRSimpleSchema,
   download = true
 ) {
   return new Promise((resolve, reject) => {
@@ -130,7 +87,7 @@ export function downloadQRCode(
 
     mergeImages([
       {
-        src: position?.imgBase64 || QR_NAVE_B64,
+        src: position?.imageBase64 || QR_NAVE_B64,
       },
       {
         src: `data:image/png;base64,${content}`,
@@ -150,10 +107,10 @@ export function downloadQRCode(
         if (download) {
           a.download = `${qrName}.png`;
           a.click();
-          resolve(true);
-        } else {
-          resolve(a);
+          return resolve(true);
         }
+
+        resolve(a);
       })
       .catch((error) => {
         reject(error);
