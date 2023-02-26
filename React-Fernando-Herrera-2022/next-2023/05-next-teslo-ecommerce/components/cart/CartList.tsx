@@ -41,7 +41,7 @@ export const CartList: FC<Props> = ({ editable = false }) => {
         >
           <Grid item xs={3}>
             {/* TODO: llevar a la página del producto */}
-            <NextLink href={`/product/${product.slug}`} passHref>
+            <NextLink href={`/product/${product.slug}`} passHref legacyBehavior>
               <Link>
                 <CardActionArea>
                   <CardMedia

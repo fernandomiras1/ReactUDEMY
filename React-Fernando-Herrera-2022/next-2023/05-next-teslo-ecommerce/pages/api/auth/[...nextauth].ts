@@ -65,7 +65,8 @@ export default NextAuth({
         token.accessToken = account.access_token;
 
         switch (account.type) {
-          case "oauth":
+          case "oauth": // Es una cuenta con redSocal.En este caso Hithub
+            // TODO: crear usuario o verigficar si extite en mi BD
             token.user = await dbUsers.oAUthToDbUser(
               user?.email || "",
               user?.name || ""
@@ -84,7 +85,7 @@ export default NextAuth({
     async session({ session, token, user }) {
       // console.log({ session, token, user });
 
-      session.accessToken = token.accessToken;
+      (session as any).accessToken = token.accessToken;
       session.user = token.user as any;
 
       return session;
