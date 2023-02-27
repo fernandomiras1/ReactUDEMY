@@ -26,7 +26,6 @@ export default NextAuth({
       async authorize(credentials) {
         console.log({ credentials });
         // return { name: 'Juan', correo: 'juan@google.com', role: 'admin' };
-
         return await dbUsers.checkUserEmailPassword(
           credentials!.email,
           credentials!.password
@@ -37,7 +36,7 @@ export default NextAuth({
     GithubProvider({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
-    }),
+    } as any),
   ],
 
   // Custom Pages

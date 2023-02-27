@@ -5,7 +5,7 @@ import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 
 import { ShopLayout } from "../../components/layouts";
 
-const columns: GridColDef[] = [
+const columns: any[] = [
   { field: "id", headerName: "ID", width: 100 },
   { field: "fullname", headerName: "Nombre Completo", width: 300 },
 

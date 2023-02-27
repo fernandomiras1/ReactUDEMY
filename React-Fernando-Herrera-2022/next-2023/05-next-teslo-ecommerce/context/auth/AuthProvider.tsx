@@ -1,4 +1,4 @@
-import { FC, useReducer, useEffect } from "react";
+import { FC, useReducer, useEffect, PropsWithChildren } from "react";
 import { AuthContext, authReducer } from "./";
 import Cookies from "js-cookie";
 import axios from "axios";
@@ -17,7 +17,7 @@ const AUTH_INITIAL_STATE: AuthState = {
   user: undefined,
 };
 
-export const AuthProvider: FC = ({ children }) => {
+export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, AUTH_INITIAL_STATE);
   // Informacion del NEXT AUTH ( Autenticacion )
   const { data, status } = useSession();
