@@ -12,6 +12,7 @@ import {
   Divider,
   Grid,
   Typography,
+  Chip,
 } from "@mui/material";
 
 import { CartContext } from "../../context";
@@ -46,6 +47,7 @@ const SummaryPage = () => {
 
     router.replace(`/orders/${message}`);
   };
+
   if (!shippingAddress) {
     return <></>;
   }
@@ -116,10 +118,22 @@ const SummaryPage = () => {
 
               <OrderSummary />
 
-              <Box sx={{ mt: 3 }}>
-                <Button color="secondary" className="circular-btn" fullWidth>
+              <Box sx={{ mt: 3 }} display="flex" flexDirection="column">
+                <Button
+                  color="secondary"
+                  className="circular-btn"
+                  fullWidth
+                  onClick={onCreateOrder}
+                  disabled={isPosting}
+                >
                   Confirmar Orden
                 </Button>
+
+                <Chip
+                  color="error"
+                  label={errorMessage}
+                  sx={{ display: errorMessage ? "flex" : "none", mt: 2 }}
+                />
               </Box>
             </CardContent>
           </Card>
