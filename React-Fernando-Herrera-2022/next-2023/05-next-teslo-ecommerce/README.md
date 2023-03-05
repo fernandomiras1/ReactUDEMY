@@ -37,4 +37,10 @@ http://localhost:3000/api/seed
 
 ```
 https://nextjs.org/docs/basic-features/data-fetching/client-side#client-side-data-fetching-with-swr
+
+
+# Providers:
+GITHUB_ID=1b48787ec9ef86a4c25e
+GITHUB_SECRET=526c8ecc7d9bb360c7d20e2fbb6383c00f5115df
+
 ```
