@@ -3,13 +3,16 @@ import { githubApi } from "../../api/githubApi";
 import { Issue } from "../interfaces";
 import { sleep } from "../../helpers/sleep";
 
-const getIssueInfo = async (issueNumber: number): Promise<Issue> => {
+export const getIssueInfo = async (issueNumber: number): Promise<Issue> => {
   await sleep(2);
+  console.log("Call API {getIssueInfo}");
   const { data } = await githubApi.get<Issue>(`/issues/${issueNumber}`);
   return data;
 };
 
-const getIssueComments = async (issueNumber: number): Promise<Issue[]> => {
+export const getIssueComments = async (
+  issueNumber: number
+): Promise<Issue[]> => {
   await sleep(2);
   const { data } = await githubApi.get<Issue[]>(
     `/issues/${issueNumber}/comments`
@@ -25,8 +28,10 @@ export const useIssue = (issueNumber: number) => {
 
   const commentsQuery = useQuery(
     ["issue", issueNumber, "comments"],
-    () => getIssueComments(issueQuery.data!.number),
+    () => getIssueComments(issueQuery.data!.number), // Data de la primera Query
     {
+      // Si enabled es el False, JAmas se va a ejecutar este Query.
+      // Espermanos que el primer query se ejecute. Lueo obtenemos el number
       enabled: issueQuery.data !== undefined,
     }
   );
