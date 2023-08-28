@@ -1,78 +1,87 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
-import './App.css'
-import { UsersList } from './components/UsersList'
-import { SortBy, type User } from './types.d'
+import { useEffect, useMemo, useRef, useState } from "react";
+import "./App.css";
+import { UsersList } from "./components/UsersList";
+import { SortBy, type User } from "./types.d";
 
-function App () {
-  const [users, setUsers] = useState<User[]>([])
-  const [showColors, setShowColors] = useState(false)
-  const [sorting, setSorting] = useState<SortBy>(SortBy.NONE)
-  const [filterCountry, setFilterCountry] = useState<string | null>(null)
+function App() {
+  const [users, setUsers] = useState<User[]>([]);
+  const [showColors, setShowColors] = useState(false);
+  const [sorting, setSorting] = useState<SortBy>(SortBy.NONE);
+  const [filterCountry, setFilterCountry] = useState<string | null>(null);
 
-  const originalUsers = useRef<User[]>([])
+  // useState: Los estados estan pensado para que cada vez que cambien se vuelva a renderizar la UI
+
+  const originalUsers = useRef<User[]>([]);
   // useRef -> para guardar un valor
   // que queremos que se comparta entre renderizados
   // pero que al cambiar, no vuelva a renderizar el componente
 
   const toggleColors = () => {
-    setShowColors(!showColors)
-  }
+    setShowColors(!showColors);
+  };
 
   const toggleSortByCountry = () => {
-    const newSortingValue = sorting === SortBy.NONE ? SortBy.COUNTRY : SortBy.NONE
-    setSorting(newSortingValue)
-  }
+    const newSortingValue =
+      sorting === SortBy.NONE ? SortBy.COUNTRY : SortBy.NONE;
+    setSorting(newSortingValue);
+  };
 
   const handleReset = () => {
-    setUsers(originalUsers.current)
-  }
+    setUsers(originalUsers.current);
+  };
 
   const handleDelete = (email: string) => {
-    const filteredUsers = users.filter((user) => user.email !== email)
-    setUsers(filteredUsers)
-  }
+    const filteredUsers = users.filter((user) => user.email !== email);
+    setUsers(filteredUsers);
+  };
 
   const handleChangeSort = (sort: SortBy) => {
-    setSorting(sort)
-  }
+    setSorting(sort);
+  };
 
   useEffect(() => {
-    fetch('https://randomuser.me/api?results=100')
-      .then(async res => await res.json())
-      .then(res => {
-        setUsers(res.results)
-        originalUsers.current = res.results
+    fetch("https://randomuser.me/api?results=100")
+      .then(async (res) => await res.json())
+      .then((res) => {
+        setUsers(res.results);
+        originalUsers.current = res.results;
       })
-      .catch(err => {
-        console.error(err)
-      })
-  }, [])
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
   const filteredUsers = useMemo(() => {
-    console.log('calculate filteredUsers')
+    console.log("calculate filteredUsers");
     return filterCountry != null && filterCountry.length > 0
-      ? users.filter(user => {
-        return user.location.country.toLowerCase().includes(filterCountry.toLowerCase())
-      })
-      : users
-  }, [users, filterCountry])
+      ? users.filter((user) => {
+          return user.location.country
+            .toLowerCase()
+            .includes(filterCountry.toLowerCase());
+        })
+      : users;
+  }, [users, filterCountry]);
 
   const sortedUsers = useMemo(() => {
-    console.log('calculate sortedUsers')
+    console.log("calculate sortedUsers");
 
-    if (sorting === SortBy.NONE) return filteredUsers
+    if (sorting === SortBy.NONE) return filteredUsers;
 
     const compareProperties: Record<string, (user: User) => any> = {
-      [SortBy.COUNTRY]: user => user.location.country,
-      [SortBy.NAME]: user => user.name.first,
-      [SortBy.LAST]: user => user.name.last
-    }
+      [SortBy.COUNTRY]: (user) => user.location.country,
+      [SortBy.NAME]: (user) => user.name.first,
+      [SortBy.LAST]: (user) => user.name.last,
+    };
 
+    // toSorted: Lo nuevo de JavaScrit porque te crea un nuevo obj, no muta. el sort tradicional muta el objeto. Y es lo que no queresmos en este caso
     return filteredUsers.toSorted((a, b) => {
-      const extractProperty = compareProperties[sorting]
-      return extractProperty(a).localeCompare(extractProperty(b))
-    })
-  }, [filteredUsers, sorting])
+      const extractProperty = compareProperties[sorting];
+      // Compara el nombre con asentos o location. Es muy bueno
+      return extractProperty(a).localeCompare(extractProperty(b));
+    });
+  }, [filteredUsers, sorting]);
+
+  // ESTO ES EL ANTES, SIN USAR USE MEMEO PARA QUE PUEDAS VER LAS DIFERENCIAS
 
   // const filteredUsers = (() => {
   //   console.log('calculate filteredUsers')
@@ -97,28 +106,33 @@ function App () {
     <div className="App">
       <h1>Prueba técnica</h1>
       <header>
-        <button onClick={toggleColors}>
-          Colorear files
-        </button>
+        <button onClick={toggleColors}>Colorear files</button>
 
         <button onClick={toggleSortByCountry}>
-          {sorting === SortBy.COUNTRY ? 'No ordenar por país' : 'Ordenar por país'}
+          {sorting === SortBy.COUNTRY
+            ? "No ordenar por país"
+            : "Ordenar por país"}
         </button>
 
-        <button onClick={handleReset}>
-          Resetear estado
-        </button>
+        <button onClick={handleReset}>Resetear estado</button>
 
-        <input placeholder='Filtra por país' onChange={(e) => {
-          setFilterCountry(e.target.value)
-        }} />
-
+        <input
+          placeholder="Filtra por país"
+          onChange={(e) => {
+            setFilterCountry(e.target.value);
+          }}
+        />
       </header>
       <main>
-        <UsersList changeSorting={handleChangeSort} deleteUser={handleDelete} showColors={showColors} users={sortedUsers} />
+        <UsersList
+          changeSorting={handleChangeSort}
+          deleteUser={handleDelete}
+          showColors={showColors}
+          users={sortedUsers}
+        />
       </main>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
