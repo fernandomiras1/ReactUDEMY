@@ -1,11 +1,13 @@
 div {
  display: grid;
  grid-template-columns: repeat(
-  auto-fill, /* auto-fill:  */
-  minmax(200px, 1fr) /* Como minimo tiene que ocupar 200px y si no utiliza 1fr que se ajustara al tamano */
+  auto-fill, /* auto-fill: Se va a comodar en esos 100px, auto-fit: se va a comodoar en el espacio disponible ( estira el contendio/ajustando hasta los limites)  */
+  minmax(100px, 1fr) /* Como minimo tiene que ocupar 200px y si no utiliza 1fr que se ajustara al tamano */
  );
 /* column-gap: 16px; separacion entre cada columna */
  gap: 16px; /* te hace una separacion tanto en filas como en columnas */
+ max-width: 800px;
+ margin: 0 auto;
 }
 
 img {
