@@ -1,0 +1,26 @@
+div {
+ display: grid;
+ grid-template-columns: 1fr;
+/* column-gap: 16px; separacion entre cada columna */
+ gap: 16px; /* te hace una separacion tanto en filas como en columnas */
+}
+
+/* se puede hacer mucho mejor, Esto es un ejemplo
+@media (width > 300px) {
+  div {
+     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (width > 600px) {
+  div {
+     grid-template-columns: 1fr 1fr 1fr;
+  }
+} */
+
+
+img {
+  border-radius: 8px;
+  width: 100%;
+  height: auto;
+}
