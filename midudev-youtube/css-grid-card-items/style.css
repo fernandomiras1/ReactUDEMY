@@ -1,8 +1,17 @@
 div {
  display: grid;
- grid-template-columns: 1fr;
+ grid-template-columns: repeat(
+  auto-fill, /* auto-fill:  */
+  minmax(200px, 1fr) /* Como minimo tiene que ocupar 200px y si no utiliza 1fr que se ajustara al tamano */
+ );
 /* column-gap: 16px; separacion entre cada columna */
  gap: 16px; /* te hace una separacion tanto en filas como en columnas */
+}
+
+img {
+  border-radius: 8px;
+  width: 100%;
+  height: auto;
 }
 
 /* se puede hacer mucho mejor, Esto es un ejemplo
@@ -19,8 +28,3 @@ div {
 } */
 
 
-img {
-  border-radius: 8px;
-  width: 100%;
-  height: auto;
-}
