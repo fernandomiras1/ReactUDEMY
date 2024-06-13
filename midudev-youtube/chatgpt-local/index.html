@@ -13,6 +13,7 @@
         background: #f0f0f0;
         display: grid;
         place-content: center;
+        /* Dinamic Viuport Hirh. Se ajusta mejor para cuando es mobil.  */
         height: 100dvh;
       }
 
@@ -153,10 +154,10 @@
         }
 
         h5 {
-          font-weight: 400;
+          font-weight: 700;
           margin: 0;
-          font-size: 10px;
-          opacity: 0.4;
+          font-size: 11px;
+          opacity: 0.6;
         }
       }
 
@@ -167,7 +168,10 @@
       }
     </style>
 
+    <!-- |tipo module, para que  vamos a poder usar los import y los export y tambien va a funcionar como defer, 
+  esparar que se carge todo el HYML para luego cargar el scpirt  -->
     <script type="module">
+      // https://github.com/mlc-ai/web-llm
       import { CreateWebWorkerMLCEngine } from "https://esm.run/@mlc-ai/web-llm";
 
       const $ = (el) => document.querySelector(el);
@@ -185,13 +189,14 @@
 
       let messages = [];
 
-      const SELECTED_MODEL = "Llama-3-8B-Instruct-q4f32_1-MLC-1k";
+      const SELECTED_MODEL = "gemma-2b-it-q4f16_1-MLC";
 
       const engine = await CreateWebWorkerMLCEngine(
         new Worker("./worker.js", { type: "module" }),
         SELECTED_MODEL,
         {
           initProgressCallback: (info) => {
+            console.log("initProgressCallback:", info);
             $info.textContent = `${info.text}%`;
             if (info.progress === 1) {
               $loading.parentNode.removeChild($loading);
@@ -263,6 +268,7 @@
 
         $messages.appendChild($newMessage);
 
+        // Que haga el scroll al final.
         $container.scrollTop = $container.scrollHeight;
 
         return $text;
@@ -288,6 +294,10 @@
 
     <small>&nbsp;</small>
 
+    <!-- HTML template: No se renderiza permite generar fragmentos de HTML o de
+    JavaScript. Basicamente es para generar HTML que se puede repetir.  -->
+
+    <!-- Como vamos a generar los Mensajes y para no tener que estar haciendolo con JavaScript lo vamos hacer con El Template, es lo mimso que con Angular -->
     <template id="message-template">
       <li class="message">
         <span></span>
