@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minmax</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="sidebar"></div> <!-- Sidebar container -->
+  
+  <div class="sidebar-test">
+   <aside>Barra Lateral
+   <h1>Hola mundo</h1>
+   </aside>
+   <main>Contenido principal</main>
+  </div>
+
+  <script src="sidebar.js"></script>
+  <style>
+    .sidebar-test {
+        display: grid;
+        grid-template-columns: minmax(100px, 1fr) 5fr;
+    }
+    aside {
+        border: 1px solid red;
+        height: 100vh;
+    }
+    main {
+        border: 1px solid blue
+    }
+    body {
+        margin: 0;
+    }
+  </style>
+</body>
+</html>

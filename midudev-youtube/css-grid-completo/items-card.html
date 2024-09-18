@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cards</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="sidebar"></div> <!-- Sidebar container -->
+  
+  <div class="main-content">
+    <div class="card-container">
+        <img src="https://rukminim2.flixcart.com/image/850/1000/jxhv1jk0/poster/c/x/v/medium-thor-avengers-endgame-new-poster-for-room-office-endgame-original-imafgyfefdnvuvjh.jpeg?q=90" />
+        <img src="https://rukminim2.flixcart.com/image/850/1000/jxhv1jk0/poster/c/x/v/medium-thor-avengers-endgame-new-poster-for-room-office-endgame-original-imafgyfefdnvuvjh.jpeg?q=90" />
+        <img src="https://rukminim2.flixcart.com/image/850/1000/jxhv1jk0/poster/c/x/v/medium-thor-avengers-endgame-new-poster-for-room-office-endgame-original-imafgyfefdnvuvjh.jpeg?q=90" />
+        <img src="https://rukminim2.flixcart.com/image/850/1000/jxhv1jk0/poster/c/x/v/medium-thor-avengers-endgame-new-poster-for-room-office-endgame-original-imafgyfefdnvuvjh.jpeg?q=90" />
+        <img src="https://rukminim2.flixcart.com/image/850/1000/jxhv1jk0/poster/c/x/v/medium-thor-avengers-endgame-new-poster-for-room-office-endgame-original-imafgyfefdnvuvjh.jpeg?q=90" />
+        <img src="https://rukminim2.flixcart.com/image/850/1000/jxhv1jk0/poster/c/x/v/medium-thor-avengers-endgame-new-poster-for-room-office-endgame-original-imafgyfefdnvuvjh.jpeg?q=90" />
+        <img src="https://rukminim2.flixcart.com/image/850/1000/jxhv1jk0/poster/c/x/v/medium-thor-avengers-endgame-new-poster-for-room-office-endgame-original-imafgyfefdnvuvjh.jpeg?q=90" />
+        <img src="https://rukminim2.flixcart.com/image/850/1000/jxhv1jk0/poster/c/x/v/medium-thor-avengers-endgame-new-poster-for-room-office-endgame-original-imafgyfefdnvuvjh.jpeg?q=90" />
+        <img src="https://rukminim2.flixcart.com/image/850/1000/jxhv1jk0/poster/c/x/v/medium-thor-avengers-endgame-new-poster-for-room-office-endgame-original-imafgyfefdnvuvjh.jpeg?q=90" />
+        <img src="https://rukminim2.flixcart.com/image/850/1000/jxhv1jk0/poster/c/x/v/medium-thor-avengers-endgame-new-poster-for-room-office-endgame-original-imafgyfefdnvuvjh.jpeg?q=90" />
+        <img src="https://rukminim2.flixcart.com/image/850/1000/jxhv1jk0/poster/c/x/v/medium-thor-avengers-endgame-new-poster-for-room-office-endgame-original-imafgyfefdnvuvjh.jpeg?q=90" />
+        <img src="https://rukminim2.flixcart.com/image/850/1000/jxhv1jk0/poster/c/x/v/medium-thor-avengers-endgame-new-poster-for-room-office-endgame-original-imafgyfefdnvuvjh.jpeg?q=90" />
+        <img src="https://rukminim2.flixcart.com/image/850/1000/jxhv1jk0/poster/c/x/v/medium-thor-avengers-endgame-new-poster-for-room-office-endgame-original-imafgyfefdnvuvjh.jpeg?q=90" />
+        <img src="https://rukminim2.flixcart.com/image/850/1000/jxhv1jk0/poster/c/x/v/medium-thor-avengers-endgame-new-poster-for-room-office-endgame-original-imafgyfefdnvuvjh.jpeg?q=90" />
+        </div>
+  </div>
+
+  <script src="sidebar.js"></script>
+  <style>
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(
+            auto-fill, /* auto-fill: Se va a comodar en esos 100px, auto-fit: se va a comodoar en el espacio disponible ( estira el contendio/ajustando hasta los limites) se puede ver cuando tienes pocas img como por ej 3. Si tenes tres imagenes y usas el fit, te va a compodar y estirar el conetido hasta los limites.   */
+            minmax(100px, 1fr) /* Como minimo tiene que ocupar 200px y si no utiliza 1fr que se ajustara al tamano */
+            );
+            /* column-gap: 16px; separacion entre cada columna */
+            gap: 16px; /* te hace una separacion tanto en filas como en columnas */
+            /* limitamos el numero de columnas, el contenedor lo hacemos centrado  */
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        img {
+            border-radius: 8px;
+            width: 100%;
+            height: auto;
+        }
+
+        /* se puede hacer mucho mejor, Esto es un ejemplo
+        @media (width > 300px) {
+        div {
+            grid-template-columns: 1fr 1fr;
+        }
+        }
+
+        @media (width > 600px) {
+        div {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+        } */
+
+  </style>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layout</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="sidebar"></div> <!-- Sidebar container -->
+    <section class="container">
+      <header>header</header>
+      <aside>aside</aside>
+      <main>content</main>
+      <footer>footer</footer>
+    </section>
+
+  <script src="sidebar.js"></script>
+  <style>
+    .container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows:  35px 1fr 100px;
+      min-height: 100vh;
+      /* ahora que sabemos el nombre de cada elementos, definimos la cuadricula a partir de estos nombres */
+      /* MODO mobil ( el sidebar lo llevo al lado del header) */
+      grid-template-areas: 
+      /* arriba quiero el header 3 veces */
+        "header header sidebar"
+        "content content content"
+        "footer footer footer"
+    }
+
+    @media (width > 400px) {
+      .container {
+        grid-template-areas: 
+      /* arriba quiero el header 3 veces */
+        "header header header"
+        "sidebar content content"
+        "footer footer footer"
+      }
+    }
+
+    .container header {
+      background: lightblue;
+      /* Nombramos cada uno de los elementos */
+      grid-area: header;
+    }
+
+    .container aside {
+      background: yellow;
+      grid-area: sidebar;
+    }
+    .container main {
+      background: lightcoral;
+      grid-area: content;
+    }
+  
+    .container footer {
+      background: lightseagreen;
+      grid-area: footer;
+    }
+
+    body {
+      margin: 0;
+    }
+  </style>
+</body>
+</html>
